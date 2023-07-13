@@ -2,10 +2,16 @@ openapi: 3.0.1
 info:
   title: Spring PetClinic
   description: Spring PetClinic Sample Application.
+  # to trigger an error, remove e.g. x-audience
+  x-audience: company-internal
+  contact:
+    name: Richard Attermeyer
+    email: richard.attermeyer@opitz-consulting.com
+    url: https://www.opitz-consulting.com/
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0
-  version: '1.0'
+  version: '1.0.0'
 servers:
   - url: http://localhost:9966/petclinic/api
 tags:
@@ -34,7 +40,7 @@ paths:
       summary: Always fails
       description: Produces sample error response.
       responses:
-        200:
+        "200":
           description: Never returned.
           headers:
             ETag:
@@ -45,14 +51,14 @@ paths:
             text/plain:
               schema:
                 type: string
-        304:
+        "304":
           description: Not modified.
           headers:
             ETag:
               description: An ID for this version of the response.
               schema:
                 type: string
-        400:
+        "400":
           description: Bad request.
           content:
             application/json:
@@ -73,19 +79,19 @@ paths:
               $ref: '#/components/schemas/OwnerFields'
         required: true
       responses:
-        201:
+        "201":
           description: The pet owner was sucessfully added.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Owner'
-        400:
+        "400":
           description: Bad request.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/RestError'
-        500:
+        "500":
           description: Server error.
           content:
             application/json:
@@ -106,7 +112,7 @@ paths:
             type: string
             example: Davis
       responses:
-        200:
+        "200":
           description: Owner details found and returned.
           headers:
             ETag:
@@ -119,14 +125,14 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Owner'
-        304:
+        "304":
           description: Not modified.
           headers:
             ETag:
               description: An ID for this version of the response.
               schema:
                 type: string
-        500:
+        "500":
           description: Server error.
           content:
             application/json:
@@ -150,7 +156,7 @@ paths:
             minimum: 0
             example: 1
       responses:
-        200:
+        "200":
           description: Owner details found and returned.
           headers:
             ETag:
@@ -161,26 +167,26 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Owner'
-        304:
+        "304":
           description: Not modified.
           headers:
             ETag:
               description: An ID for this version of the response.
               schema:
                 type: string
-        400:
+        "400":
           description: Bad request.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/RestError'
-        404:
+        "404":
           description: Owner not found.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/RestError'
-        500:
+        "500":
           description: Server error.
           content:
             application/json:
@@ -210,25 +216,25 @@ paths:
               $ref: '#/components/schemas/OwnerFields'
         required: true
       responses:
-        200:
+        "200":
           description: Update successful.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Owner'
-        400:
+        "400":
           description: Bad request.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/RestError'
-        404:
+        "404":
           description: Owner not found.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/RestError'
-        500:
+        "500":
           description: Server error.
           content:
             application/json:
@@ -252,7 +258,7 @@ paths:
             minimum: 0
             example: 1
       responses:
-        200:
+        "200":
           description: Owner details found and returned.
           headers:
             ETag:
@@ -263,26 +269,21 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Owner'
-        304:
-          description: Not modified.
-          headers:
-            ETag:
-              description: An ID for this version of the response.
-              schema:
-                type: string
-        400:
+#        304 has no valid (standard-compliant) semantics in delete operations, see: https://www.rfc-editor.org/rfc/rfc9110#status.304
+#        see: also https://stackoverflow.com/a/35643849
+        "400":
           description: Bad request.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/RestError'
-        404:
+        "404":
           description: Owner  not found.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/RestError'
-        500:
+        "500":
           description: Server error.
           content:
             application/json:
@@ -313,25 +314,25 @@ paths:
               $ref: '#/components/schemas/PetFields'
         required: true
       responses:
-        201:
+        "201":
           description: The pet was sucessfully added.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Pet'
-        400:
+        "400":
           description: Bad request.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/RestError'
-        404:
+        "404":
           description: Pet not found.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/RestError'
-        500:
+        "500":
           description: Server error.
           content:
             application/json:
@@ -364,7 +365,7 @@ paths:
             minimum: 0
             example: 1
       responses:
-        200:
+        "200":
           description: Pet details found and returned.
           headers:
             ETag:
@@ -375,26 +376,26 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Pet'
-        304:
+        "304":
           description: Not modified.
           headers:
             ETag:
               description: An ID for this version of the response.
               schema:
                 type: string
-        400:
+        "400":
           description: Bad request.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/RestError'
-        404:
+        "404":
           description: Pet not found.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/RestError'
-        500:
+        "500":
           description: Server error.
           content:
             application/json:
@@ -434,22 +435,10 @@ paths:
               $ref: '#/components/schemas/PetFields'
         required: true
       responses:
-        204:
+        "204":
           description: Update successful.
-        400:
+        default:
           description: Bad request.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/RestError'
-        404:
-          description: Pet not found for this owner.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/RestError'
-        500:
-          description: Server error.
           content:
             application/json:
               schema:
@@ -488,25 +477,25 @@ paths:
               $ref: '#/components/schemas/VisitFields'
         required: true
       responses:
-        201:
+        "201":
           description: The vet visit was sucessfully added.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Visit'
-        400:
+        "400":
           description: Bad request.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/RestError'
-        404:
+        "404":
           description: Pet not found for this owner.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/RestError'
-        500:
+        "500":
           description: Server error.
           content:
             application/json:
@@ -520,7 +509,7 @@ paths:
       summary: Lists pet types
       description: Returns an array of pet types.
       responses:
-        200:
+        "200":
           description: Pet types found and returned.
           headers:
             ETag:
@@ -533,14 +522,14 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/PetType'
-        304:
+        "304":
           description: Not modified.
           headers:
             ETag:
               description: An ID for this version of the response.
               schema:
                 type: string
-        500:
+        "500":
           description: Server error.
           content:
             application/json:
@@ -560,7 +549,7 @@ paths:
               $ref: '#/components/schemas/PetType'
         required: true
       responses:
-        200:
+        "200":
           description: Pet type created successfully.
           headers:
             ETag:
@@ -571,26 +560,21 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PetType'
-        304:
-          description: Not modified.
-          headers:
-            ETag:
-              description: An ID for this version of the response.
-              schema:
-                type: string
-        400:
+        #        304 has no valid (standard-compliant) semantics in post operations, see: https://www.rfc-editor.org/rfc/rfc9110#status.304
+        #        see: also https://stackoverflow.com/a/35643849
+        "400":
           description: Bad request.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/RestError'
-        404:
+        "404":
           description: Pet Type not found.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/RestError'
-        500:
+        "500":
           description: Server error.
           content:
             application/json:
@@ -614,7 +598,7 @@ paths:
             minimum: 0
             example: 1
       responses:
-        200:
+        "200":
           description: Pet type details found and returned.
           headers:
             ETag:
@@ -625,26 +609,26 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PetType'
-        304:
+        "304":
           description: Not modified.
           headers:
             ETag:
               description: An ID for this version of the response.
               schema:
                 type: string
-        400:
+        "400":
           description: Bad request.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/RestError'
-        404:
+        "404":
           description: Pet Type not found.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/RestError'
-        500:
+        "500":
           description: Server error.
           content:
             application/json:
@@ -674,7 +658,7 @@ paths:
               $ref: '#/components/schemas/PetType'
         required: true
       responses:
-        200:
+        "200":
           description: Pet type details found and returned.
           headers:
             ETag:
@@ -685,26 +669,21 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PetType'
-        304:
-          description: Not modified.
-          headers:
-            ETag:
-              description: An ID for this version of the response.
-              schema:
-                type: string
-        400:
+        #        304 has no valid (standard-compliant) semantics in put operations, see: https://www.rfc-editor.org/rfc/rfc9110#status.304
+        #        see: also https://stackoverflow.com/a/35643849
+        "400":
           description: Bad request.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/RestError'
-        404:
+        "404":
           description: Pet Type not found.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/RestError'
-        500:
+        "500":
           description: Server error.
           content:
             application/json:
@@ -727,7 +706,7 @@ paths:
             minimum: 0
             example: 1
       responses:
-        200:
+        "200":
           description: Pet type details found and returned.
           headers:
             ETag:
@@ -738,26 +717,21 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PetType'
-        304:
-          description: Not modified.
-          headers:
-            ETag:
-              description: An ID for this version of the response.
-              schema:
-                type: string
-        400:
+        #        304 has no valid (standard-compliant) semantics in delete operations, see: https://www.rfc-editor.org/rfc/rfc9110#status.304
+        #        see: also https://stackoverflow.com/a/35643849
+        "400":
           description: Bad request.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/RestError'
-        404:
+        "404":
           description: Pet type not found.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/RestError'
-        500:
+        "500":
           description: Server error.
           content:
             application/json:
@@ -772,7 +746,7 @@ paths:
       summary: Lists pet
       description: Returns an array of pet .
       responses:
-        200:
+        "200":
           description: Pet types found and returned.
           headers:
             ETag:
@@ -785,14 +759,14 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Pet'
-        304:
+        "304":
           description: Not modified.
           headers:
             ETag:
               description: An ID for this version of the response.
               schema:
                 type: string
-        500:
+        "500":
           description: Server error.
           content:
             application/json:
@@ -812,7 +786,7 @@ paths:
               $ref: '#/components/schemas/Pet'
         required: true
       responses:
-        200:
+        "200":
           description: Pet type created successfully.
           headers:
             ETag:
@@ -823,26 +797,21 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Pet'
-        304:
-          description: Not modified.
-          headers:
-            ETag:
-              description: An ID for this version of the response.
-              schema:
-                type: string
-        400:
+        #        304 has no valid (standard-compliant) semantics in post operations, see: https://www.rfc-editor.org/rfc/rfc9110#status.304
+        #        see: also https://stackoverflow.com/a/35643849
+        "400":
           description: Bad request.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/RestError'
-        404:
+        "404":
           description: Pet not found.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/RestError'
-        500:
+        "500":
           description: Server error.
           content:
             application/json:
@@ -866,7 +835,7 @@ paths:
             minimum: 0
             example: 1
       responses:
-        200:
+        "200":
           description: Pet details found and returned.
           headers:
             ETag:
@@ -877,26 +846,26 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Pet'
-        304:
+        "304":
           description: Not modified.
           headers:
             ETag:
               description: An ID for this version of the response.
               schema:
                 type: string
-        400:
+        "400":
           description: Bad request.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/RestError'
-        404:
+        "404":
           description: Pet not found.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/RestError'
-        500:
+        "500":
           description: Server error.
           content:
             application/json:
@@ -926,7 +895,7 @@ paths:
               $ref: '#/components/schemas/Pet'
         required: true
       responses:
-        200:
+        "200":
           description: Pet details found and returned.
           headers:
             ETag:
@@ -937,26 +906,21 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Pet'
-        304:
-          description: Not modified.
-          headers:
-            ETag:
-              description: An ID for this version of the response.
-              schema:
-                type: string
-        400:
+      #        304 has no valid (standard-compliant) semantics in put operations, see: https://www.rfc-editor.org/rfc/rfc9110#status.304
+      #        see: also https://stackoverflow.com/a/35643849
+        "400":
           description: Bad request.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/RestError'
-        404:
+        "404":
           description: Pet not found.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/RestError'
-        500:
+        "500":
           description: Server error.
           content:
             application/json:
@@ -979,7 +943,7 @@ paths:
             minimum: 0
             example: 1
       responses:
-        200:
+        "200":
           description: Pet details found and returned.
           headers:
             ETag:
@@ -990,26 +954,21 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Pet'
-        304:
-          description: Not modified.
-          headers:
-            ETag:
-              description: An ID for this version of the response.
-              schema:
-                type: string
-        400:
+        #        304 has no valid (standard-compliant) semantics in delete operations, see: https://www.rfc-editor.org/rfc/rfc9110#status.304
+        #        see: also https://stackoverflow.com/a/35643849
+        "400":
           description: Bad request.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/RestError'
-        404:
+        "404":
           description: Pet not found.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/RestError'
-        500:
+        "500":
           description: Server error.
           content:
             application/json:
@@ -1023,7 +982,7 @@ paths:
       summary: Lists visits
       description: Returns an array of visit .
       responses:
-        200:
+        "200":
           description: visits found and returned.
           headers:
             ETag:
@@ -1036,14 +995,14 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Visit'
-        304:
+        "304":
           description: Not modified.
           headers:
             ETag:
               description: An ID for this version of the response.
               schema:
                 type: string
-        500:
+        "500":
           description: Server error.
           content:
             application/json:
@@ -1063,7 +1022,7 @@ paths:
               $ref: '#/components/schemas/Visit'
         required: true
       responses:
-        200:
+        "200":
           description: visit created successfully.
           headers:
             ETag:
@@ -1074,26 +1033,21 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Visit'
-        304:
-          description: Not modified.
-          headers:
-            ETag:
-              description: An ID for this version of the response.
-              schema:
-                type: string
-        400:
+        #        304 has no valid (standard-compliant) semantics in post operations, see: https://www.rfc-editor.org/rfc/rfc9110#status.304
+        #        see: also https://stackoverflow.com/a/35643849
+        "400":
           description: Bad request.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/RestError'
-        404:
+        "404":
           description: Visit not found.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/RestError'
-        500:
+        "500":
           description: Server error.
           content:
             application/json:
@@ -1117,7 +1071,7 @@ paths:
             minimum: 0
             example: 1
       responses:
-        200:
+        "200":
           description: Visit details found and returned.
           headers:
             ETag:
@@ -1128,26 +1082,26 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Visit'
-        304:
+        "304":
           description: Not modified.
           headers:
             ETag:
               description: An ID for this version of the response.
               schema:
                 type: string
-        400:
+        "400":
           description: Bad request.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/RestError'
-        404:
+        "404":
           description: Visit not found.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/RestError'
-        500:
+        "500":
           description: Server error.
           content:
             application/json:
@@ -1177,7 +1131,7 @@ paths:
               $ref: '#/components/schemas/Visit'
         required: true
       responses:
-        200:
+        "200":
           description: Visit details found and returned.
           headers:
             ETag:
@@ -1188,26 +1142,21 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Visit'
-        304:
-          description: Not modified.
-          headers:
-            ETag:
-              description: An ID for this version of the response.
-              schema:
-                type: string
-        400:
+        #        304 has no valid (standard-compliant) semantics in put operations, see: https://www.rfc-editor.org/rfc/rfc9110#status.304
+        #        see: also https://stackoverflow.com/a/35643849
+        "400":
           description: Bad request.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/RestError'
-        404:
+        "404":
           description: Visit not found.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/RestError'
-        500:
+        "500":
           description: Server error.
           content:
             application/json:
@@ -1230,7 +1179,7 @@ paths:
             minimum: 0
             example: 1
       responses:
-        200:
+        "200":
           description: Visit details found and returned.
           headers:
             ETag:
@@ -1241,26 +1190,21 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Visit'
-        304:
-          description: Not modified.
-          headers:
-            ETag:
-              description: An ID for this version of the response.
-              schema:
-                type: string
-        400:
+        #        304 has no valid (standard-compliant) semantics in delete operations, see: https://www.rfc-editor.org/rfc/rfc9110#status.304
+        #        see: also https://stackoverflow.com/a/35643849
+        "400":
           description: Bad request.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/RestError'
-        404:
+        "404":
           description: Visit not found.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/RestError'
-        500:
+        "500":
           description: Server error.
           content:
             application/json:
@@ -1274,7 +1218,7 @@ paths:
       summary: Lists specialties
       description: Returns an array of specialty .
       responses:
-        200:
+        "200":
           description: Specialties found and returned.
           headers:
             ETag:
@@ -1287,14 +1231,14 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Specialty'
-        304:
+        "304":
           description: Not modified.
           headers:
             ETag:
               description: An ID for this version of the response.
               schema:
                 type: string
-        500:
+        "500":
           description: Server error.
           content:
             application/json:
@@ -1314,7 +1258,7 @@ paths:
               $ref: '#/components/schemas/Specialty'
         required: true
       responses:
-        200:
+        "200":
           description: Specialty created successfully.
           headers:
             ETag:
@@ -1325,26 +1269,21 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Specialty'
-        304:
-          description: Not modified.
-          headers:
-            ETag:
-              description: An ID for this version of the response.
-              schema:
-                type: string
-        400:
+        #        304 has no valid (standard-compliant) semantics in post operations, see: https://www.rfc-editor.org/rfc/rfc9110#status.304
+        #        see: also https://stackoverflow.com/a/35643849
+        "400":
           description: Bad request.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/RestError'
-        404:
+        "404":
           description: Specialty not found.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/RestError'
-        500:
+        "500":
           description: Server error.
           content:
             application/json:
@@ -1368,7 +1307,7 @@ paths:
             minimum: 0
             example: 1
       responses:
-        200:
+        "200":
           description: Specialty details found and returned.
           headers:
             ETag:
@@ -1379,26 +1318,26 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Specialty'
-        304:
+        "304":
           description: Not modified.
           headers:
             ETag:
               description: An ID for this version of the response.
               schema:
                 type: string
-        400:
+        "400":
           description: Bad request.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/RestError'
-        404:
+        "404":
           description: Specialty not found.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/RestError'
-        500:
+        "500":
           description: Server error.
           content:
             application/json:
@@ -1428,7 +1367,7 @@ paths:
               $ref: '#/components/schemas/Specialty'
         required: true
       responses:
-        200:
+        "200":
           description: Specialty details found and returned.
           headers:
             ETag:
@@ -1439,26 +1378,21 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Specialty'
-        304:
-          description: Not modified.
-          headers:
-            ETag:
-              description: An ID for this version of the response.
-              schema:
-                type: string
-        400:
+        #        304 has no valid (standard-compliant) semantics in post operations, see: https://www.rfc-editor.org/rfc/rfc9110#status.304
+        #        see: also https://stackoverflow.com/a/35643849
+        "400":
           description: Bad request.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/RestError'
-        404:
+        "404":
           description: Specialty not found.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/RestError'
-        500:
+        "500":
           description: Server error.
           content:
             application/json:
@@ -1481,7 +1415,7 @@ paths:
             minimum: 0
             example: 1
       responses:
-        200:
+        "200":
           description: Specialty details found and returned.
           headers:
             ETag:
@@ -1492,26 +1426,21 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Specialty'
-        304:
-          description: Not modified.
-          headers:
-            ETag:
-              description: An ID for this version of the response.
-              schema:
-                type: string
-        400:
+        #        304 has no valid (standard-compliant) semantics in delete operations, see: https://www.rfc-editor.org/rfc/rfc9110#status.304
+        #        see: also https://stackoverflow.com/a/35643849
+        "400":
           description: Bad request.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/RestError'
-        404:
+        "404":
           description: Specialty not found.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/RestError'
-        500:
+        "500":
           description: Server error.
           content:
             application/json:
@@ -1525,7 +1454,7 @@ paths:
       summary: Lists vets
       description: Returns an array of vets.
       responses:
-        200:
+        "200":
           description: Vets found and returned.
           headers:
             ETag:
@@ -1538,14 +1467,14 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Vet'
-        304:
+        "304":
           description: Not modified.
           headers:
             ETag:
               description: An ID for this version of the response.
               schema:
                 type: string
-        500:
+        "500":
           description: Server error.
           content:
             application/json:
@@ -1566,7 +1495,7 @@ paths:
               $ref: '#/components/schemas/Vet'
         required: true
       responses:
-        200:
+        "200":
           description: Vet created successfully.
           headers:
             ETag:
@@ -1577,26 +1506,21 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Vet'
-        304:
-          description: Not modified.
-          headers:
-            ETag:
-              description: An ID for this version of the response.
-              schema:
-                type: string
-        400:
+        #        304 has no valid (standard-compliant) semantics in post operations, see: https://www.rfc-editor.org/rfc/rfc9110#status.304
+        #        see: also https://stackoverflow.com/a/35643849
+        "400":
           description: Bad request.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/RestError'
-        404:
+        "404":
           description: Vet not found.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/RestError'
-        500:
+        "500":
           description: Server error.
           content:
             application/json:
@@ -1620,7 +1544,7 @@ paths:
             minimum: 0
             example: 1
       responses:
-        200:
+        "200":
           description: Vet details found and returned.
           headers:
             ETag:
@@ -1631,26 +1555,26 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Vet'
-        304:
+        "304":
           description: Not modified.
           headers:
             ETag:
               description: An ID for this version of the response.
               schema:
                 type: string
-        400:
+        "400":
           description: Bad request.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/RestError'
-        404:
+        "404":
           description: Vet not found.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/RestError'
-        500:
+        "500":
           description: Server error.
           content:
             application/json:
@@ -1680,7 +1604,7 @@ paths:
               $ref: '#/components/schemas/Vet'
         required: true
       responses:
-        200:
+        "200":
           description: Pet type details found and returned.
           headers:
             ETag:
@@ -1691,26 +1615,21 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Vet'
-        304:
-          description: Not modified.
-          headers:
-            ETag:
-              description: An ID for this version of the response.
-              schema:
-                type: string
-        400:
+        #        304 has no valid (standard-compliant) semantics in put operations, see: https://www.rfc-editor.org/rfc/rfc9110#status.304
+        #        see: also https://stackoverflow.com/a/35643849
+        "400":
           description: Bad request.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/RestError'
-        404:
+        "404":
           description: Vet not found.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/RestError'
-        500:
+        "500":
           description: Server error.
           content:
             application/json:
@@ -1733,7 +1652,7 @@ paths:
             minimum: 0
             example: 1
       responses:
-        200:
+        "200":
           description: Vet details found and returned.
           headers:
             ETag:
@@ -1744,26 +1663,21 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Vet'
-        304:
-          description: Not modified.
-          headers:
-            ETag:
-              description: An ID for this version of the response.
-              schema:
-                type: string
-        400:
+        #        304 has no valid (standard-compliant) semantics in delete operations, see: https://www.rfc-editor.org/rfc/rfc9110#status.304
+        #        see: also https://stackoverflow.com/a/35643849
+        "400":
           description: Bad request.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/RestError'
-        404:
+        "404":
           description: Vet not found.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/RestError'
-        500:
+        "500":
           description: Server error.
           content:
             application/json:
@@ -1784,7 +1698,7 @@ paths:
               $ref: '#/components/schemas/User'
         required: true
       responses:
-        200:
+        "200":
           description: User created successfully.
           headers:
             ETag:
@@ -1795,26 +1709,21 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/User'
-        304:
-          description: Not modified.
-          headers:
-            ETag:
-              description: An ID for this version of the response.
-              schema:
-                type: string
-        400:
+        #        304 has no valid (standard-compliant) semantics in post operations, see: https://www.rfc-editor.org/rfc/rfc9110#status.304
+        #        see: also https://stackoverflow.com/a/35643849
+        "400":
           description: Bad request.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/RestError'
-        404:
+        "404":
           description: User not found.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/RestError'
-        500:
+        "500":
           description: Server error.
           content:
             application/json:

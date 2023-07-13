@@ -1,3 +1,23 @@
+# Example for an API-first approach demonstrating custom spectral ruleset
+
+Assuring that an OpenAPI specification is a tedious task.
+This can be simplified using spectral rulesets.
+
+TODO: currently rulesets are included directly in this project.
+
+They are based on https://github.com/baloise-incubator/spectral-ruleset
+And the customizations should be placed into its on git repository which should be referenced instead of project-local rulesets. 
+
+Compared to the original project, we have included additional plugins 
+
+* openapi-diff: To check for incompatible changes (which we have, because of removed responses)
+* frontend-maven-plugin: to run spectral linting tests
+
+Executions are bound to the `test` phase.
+`mvn test` will result in a breaking build because of incompatible changes.
+
+You need to disable the openapi-diff plugin in the pom to get a successful build.
+
 # REST version of Spring PetClinic Sample Application (spring-framework-petclinic extend ) 
 
 [![Build Status](https://github.com/spring-petclinic/spring-petclinic-rest/actions/workflows/maven-build.yml/badge.svg)](https://github.com/spring-petclinic/spring-petclinic-rest/actions/workflows/maven-build.yml)
