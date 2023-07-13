@@ -14,6 +14,7 @@ Compared to the original project, we have included additional plugins
 * frontend-maven-plugin: to run spectral linting tests
 
 Executions are bound to the `test` phase.
+
 `mvn test` will result in a breaking build because of incompatible changes.
 
 You need to disable the openapi-diff plugin in the pom to get a successful build.

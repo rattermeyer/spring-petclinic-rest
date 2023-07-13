@@ -357,7 +357,7 @@
                         <configuration>
                             <!-- TODO: this should later point to a repository that contains the rules, instead of embedded rules -->
                             <!-- this generates results as a JUNIT XML test report -->
-                            <arguments>spectral lint src/main/resources/openapi.yml --ruleset src/test/resources/spectral-rulesets/ed.yml -f junit -o ${build.directory}/surefire-reports/TEST-openapi-lint.xml</arguments>
+                            <arguments>spectral lint src/main/resources/openapi.yml -f junit -o ${build.directory}/surefire-reports/TEST-openapi-lint.xml</arguments>
                         </configuration>
                     </execution>
                 </executions>

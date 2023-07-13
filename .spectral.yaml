@@ -1,0 +1,6 @@
+extends:
+  - https://raw.githubusercontent.com/rattermeyer/spectral-ruleset/v0.8.0/eurodata.yml
+
+formats: [oas3]
+
+rules: {}
