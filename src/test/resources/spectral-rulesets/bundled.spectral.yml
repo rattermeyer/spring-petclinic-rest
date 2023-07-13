@@ -1,8 +1,0 @@
-extends:
-  - [spectral:oas, all]
-  - ./ed.yml
-
-formats: [oas3]
-
-rules:
-  must-use-problem-json-as-default-response: warn
