@@ -26,7 +26,5 @@ import org.springframework.samples.petclinic.repository.VetRepository;
  * @author Michael Isvy
  * @since 15.1.2013
  */
-
 @Profile("spring-data-jpa")
-public interface SpringDataVetRepository extends VetRepository, Repository<Vet, Integer> {
-}
+public interface SpringDataVetRepository extends VetRepository, Repository<Vet, Integer> {}

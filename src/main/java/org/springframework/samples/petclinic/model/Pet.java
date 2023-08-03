@@ -15,14 +15,11 @@
  */
 package org.springframework.samples.petclinic.model;
 
-import org.springframework.beans.support.MutableSortDefinition;
-import org.springframework.beans.support.PropertyComparator;
-import org.springframework.format.annotation.DateTimeFormat;
-
 import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.util.*;
-
+import org.springframework.beans.support.MutableSortDefinition;
+import org.springframework.beans.support.PropertyComparator;
 
 /**
  * Simple business object representing a pet.
@@ -98,5 +95,4 @@ public class Pet extends NamedEntity {
         getVisitsInternal().add(visit);
         visit.setPet(this);
     }
-
 }

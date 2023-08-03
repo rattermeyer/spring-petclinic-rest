@@ -23,10 +23,8 @@ import org.springframework.samples.petclinic.model.Visit;
  * @author Vitaliy Fedoriv
  *
  */
-
 @Profile("spring-data-jpa")
 public interface VisitRepositoryOverride {
-	
-	void delete(Visit visit);
 
+    void delete(Visit visit);
 }

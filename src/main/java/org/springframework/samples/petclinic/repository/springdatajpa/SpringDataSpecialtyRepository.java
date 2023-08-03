@@ -21,13 +21,10 @@ import org.springframework.data.repository.Repository;
 import org.springframework.samples.petclinic.model.Specialty;
 import org.springframework.samples.petclinic.repository.SpecialtyRepository;
 
-
 /**
  * @author Vitaliy Fedoriv
  *
  */
-
 @Profile("spring-data-jpa")
-public interface SpringDataSpecialtyRepository extends SpecialtyRepository, Repository<Specialty, Integer>, SpecialtyRepositoryOverride {
-
-}
+public interface SpringDataSpecialtyRepository
+        extends SpecialtyRepository, Repository<Specialty, Integer>, SpecialtyRepositoryOverride {}

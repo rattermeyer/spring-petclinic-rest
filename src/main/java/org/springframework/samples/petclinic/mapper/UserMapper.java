@@ -1,12 +1,11 @@
 package org.springframework.samples.petclinic.mapper;
 
+import java.util.Collection;
 import org.mapstruct.Mapper;
-import org.springframework.samples.petclinic.rest.dto.RoleDto;
-import org.springframework.samples.petclinic.rest.dto.UserDto;
 import org.springframework.samples.petclinic.model.Role;
 import org.springframework.samples.petclinic.model.User;
-
-import java.util.Collection;
+import org.springframework.samples.petclinic.rest.dto.RoleDto;
+import org.springframework.samples.petclinic.rest.dto.UserDto;
 
 /**
  * Map User/Role & UserDto/RoleDto using mapstruct
@@ -24,5 +23,4 @@ public interface UserMapper {
     UserDto toUserDto(User user);
 
     Collection<Role> toRoles(Collection<RoleDto> roleDtos);
-
 }

@@ -1,12 +1,11 @@
 package org.springframework.samples.petclinic.mapper;
 
-import org.mapstruct.Mapper;
-import org.springframework.samples.petclinic.rest.dto.PetTypeDto;
-import org.springframework.samples.petclinic.model.PetType;
-import org.springframework.samples.petclinic.rest.dto.PetTypeFieldsDto;
-
 import java.util.Collection;
 import java.util.List;
+import org.mapstruct.Mapper;
+import org.springframework.samples.petclinic.model.PetType;
+import org.springframework.samples.petclinic.rest.dto.PetTypeDto;
+import org.springframework.samples.petclinic.rest.dto.PetTypeFieldsDto;
 
 /**
  * Map PetType & PetTypeDto using mapstruct

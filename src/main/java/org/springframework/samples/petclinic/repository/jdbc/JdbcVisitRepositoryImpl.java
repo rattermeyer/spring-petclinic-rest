@@ -15,6 +15,10 @@
  */
 package org.springframework.samples.petclinic.repository.jdbc;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.*;
+import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.dao.DataAccessException;
@@ -30,11 +34,6 @@ import org.springframework.samples.petclinic.model.PetType;
 import org.springframework.samples.petclinic.model.Visit;
 import org.springframework.samples.petclinic.repository.VisitRepository;
 import org.springframework.stereotype.Repository;
-
-import javax.sql.DataSource;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.*;
 
 /**
  * A simple JDBC-based implementation of the {@link VisitRepository} interface.
@@ -59,21 +58,19 @@ public class JdbcVisitRepositoryImpl implements VisitRepository {
     public JdbcVisitRepositoryImpl(DataSource dataSource) {
         this.namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
 
-        this.insertVisit = new SimpleJdbcInsert(dataSource)
-            .withTableName("visits")
-            .usingGeneratedKeyColumns("id");
+        this.insertVisit =
+                new SimpleJdbcInsert(dataSource).withTableName("visits").usingGeneratedKeyColumns("id");
     }
-
 
     /**
      * Creates a {@link MapSqlParameterSource} based on data values from the supplied {@link Visit} instance.
      */
     protected MapSqlParameterSource createVisitParameterSource(Visit visit) {
         return new MapSqlParameterSource()
-            .addValue("id", visit.getId())
-            .addValue("visit_date", visit.getDate())
-            .addValue("description", visit.getDescription())
-            .addValue("pet_id", visit.getPet().getId());
+                .addValue("id", visit.getId())
+                .addValue("visit_date", visit.getDate())
+                .addValue("description", visit.getDescription())
+                .addValue("pet_id", visit.getPet().getId());
     }
 
     @Override
@@ -81,13 +78,14 @@ public class JdbcVisitRepositoryImpl implements VisitRepository {
         Map<String, Object> params = new HashMap<>();
         params.put("id", petId);
         JdbcPet pet = this.namedParameterJdbcTemplate.queryForObject(
-            "SELECT id as pets_id, name, birth_date, type_id, owner_id FROM pets WHERE id=:id",
-            params,
-            new JdbcPetRowMapper());
+                "SELECT id as pets_id, name, birth_date, type_id, owner_id FROM pets WHERE id=:id",
+                params,
+                new JdbcPetRowMapper());
 
         List<Visit> visits = this.namedParameterJdbcTemplate.query(
-            "SELECT id as visit_id, visit_date, description FROM visits WHERE pet_id=:id",
-            params, new JdbcVisitRowMapper());
+                "SELECT id as visit_id, visit_date, description FROM visits WHERE pet_id=:id",
+                params,
+                new JdbcVisitRowMapper());
 
         for (Visit visit : visits) {
             visit.setPet(pet);
@@ -103,9 +101,9 @@ public class JdbcVisitRepositoryImpl implements VisitRepository {
             Map<String, Object> params = new HashMap<>();
             params.put("id", id);
             visit = this.namedParameterJdbcTemplate.queryForObject(
-                "SELECT id as visit_id, visits.pet_id as pets_id, visit_date, description FROM visits WHERE id= :id",
-                params,
-                new JdbcVisitRowMapperExt());
+                    "SELECT id as visit_id, visits.pet_id as pets_id, visit_date, description FROM visits WHERE id= :id",
+                    params,
+                    new JdbcVisitRowMapperExt());
         } catch (EmptyResultDataAccessException ex) {
             throw new ObjectRetrievalFailureException(Visit.class, id);
         }
@@ -116,8 +114,9 @@ public class JdbcVisitRepositoryImpl implements VisitRepository {
     public Collection<Visit> findAll() throws DataAccessException {
         Map<String, Object> params = new HashMap<>();
         return this.namedParameterJdbcTemplate.query(
-            "SELECT id as visit_id, pets.id as pets_id, visit_date, description FROM visits LEFT JOIN pets ON visits.pet_id = pets.id",
-            params, new JdbcVisitRowMapperExt());
+                "SELECT id as visit_id, pets.id as pets_id, visit_date, description FROM visits LEFT JOIN pets ON visits.pet_id = pets.id",
+                params,
+                new JdbcVisitRowMapperExt());
     }
 
     @Override
@@ -127,8 +126,8 @@ public class JdbcVisitRepositoryImpl implements VisitRepository {
             visit.setId(newKey.intValue());
         } else {
             this.namedParameterJdbcTemplate.update(
-                "UPDATE visits SET visit_date=:visit_date, description=:description, pet_id=:pet_id WHERE id=:id ",
-                createVisitParameterSource(visit));
+                    "UPDATE visits SET visit_date=:visit_date, description=:description, pet_id=:pet_id WHERE id=:id ",
+                    createVisitParameterSource(visit));
         }
     }
 
@@ -154,24 +153,23 @@ public class JdbcVisitRepositoryImpl implements VisitRepository {
             Map<String, Object> params = new HashMap<>();
             params.put("id", rs.getInt("pets_id"));
             pet = JdbcVisitRepositoryImpl.this.namedParameterJdbcTemplate.queryForObject(
-                "SELECT pets.id as pets_id, name, birth_date, type_id, owner_id FROM pets WHERE pets.id=:id",
-                params,
-                new JdbcPetRowMapper());
+                    "SELECT pets.id as pets_id, name, birth_date, type_id, owner_id FROM pets WHERE pets.id=:id",
+                    params,
+                    new JdbcPetRowMapper());
             params.put("type_id", pet.getTypeId());
             petType = JdbcVisitRepositoryImpl.this.namedParameterJdbcTemplate.queryForObject(
-                "SELECT id, name FROM types WHERE id= :type_id",
-                params,
-                BeanPropertyRowMapper.newInstance(PetType.class));
+                    "SELECT id, name FROM types WHERE id= :type_id",
+                    params,
+                    BeanPropertyRowMapper.newInstance(PetType.class));
             pet.setType(petType);
             params.put("owner_id", pet.getOwnerId());
             owner = JdbcVisitRepositoryImpl.this.namedParameterJdbcTemplate.queryForObject(
-                "SELECT id, first_name, last_name, address, city, telephone FROM owners WHERE id= :owner_id",
-                params,
-                BeanPropertyRowMapper.newInstance(Owner.class));
+                    "SELECT id, first_name, last_name, address, city, telephone FROM owners WHERE id= :owner_id",
+                    params,
+                    BeanPropertyRowMapper.newInstance(Owner.class));
             pet.setOwner(owner);
             visit.setPet(pet);
             return visit;
         }
     }
-
 }

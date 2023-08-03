@@ -16,12 +16,11 @@
 package org.springframework.samples.petclinic.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.springframework.beans.support.MutableSortDefinition;
-import org.springframework.beans.support.PropertyComparator;
-
 import jakarta.persistence.*;
 import jakarta.xml.bind.annotation.XmlElement;
 import java.util.*;
+import org.springframework.beans.support.MutableSortDefinition;
+import org.springframework.beans.support.PropertyComparator;
 
 /**
  * Simple JavaBean domain object representing a veterinarian.
@@ -36,8 +35,10 @@ import java.util.*;
 public class Vet extends Person {
 
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "vet_specialties", joinColumns = @JoinColumn(name = "vet_id"),
-        inverseJoinColumns = @JoinColumn(name = "specialty_id"))
+    @JoinTable(
+            name = "vet_specialties",
+            joinColumns = @JoinColumn(name = "vet_id"),
+            inverseJoinColumns = @JoinColumn(name = "specialty_id"))
     private Set<Specialty> specialties;
 
     @JsonIgnore
@@ -75,5 +76,4 @@ public class Vet extends Person {
     public void clearSpecialties() {
         getSpecialtiesInternal().clear();
     }
-
 }

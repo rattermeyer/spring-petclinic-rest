@@ -16,6 +16,9 @@
 
 package org.springframework.samples.petclinic.rest.controller;
 
+import jakarta.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.List;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,14 +31,9 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import jakarta.transaction.Transactional;
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * @author Vitaliy Fedoriv
  */
-
 @RestController
 @CrossOrigin(exposedHeaders = "errors, content-type")
 @RequestMapping("api")
@@ -50,7 +48,6 @@ public class VisitRestController implements VisitsApi {
         this.visitMapper = visitMapper;
     }
 
-
     @PreAuthorize("hasRole(@roles.OWNER_ADMIN)")
     @Override
     public ResponseEntity<List<VisitDto>> listVisits() {
@@ -63,7 +60,7 @@ public class VisitRestController implements VisitsApi {
 
     @PreAuthorize("hasRole(@roles.OWNER_ADMIN)")
     @Override
-    public ResponseEntity<VisitDto> getVisit( Integer visitId) {
+    public ResponseEntity<VisitDto> getVisit(Integer visitId) {
         Visit visit = this.clinicService.findVisitById(visitId);
         if (visit == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -78,7 +75,10 @@ public class VisitRestController implements VisitsApi {
         Visit visit = visitMapper.toVisit(visitDto);
         this.clinicService.saveVisit(visit);
         visitDto = visitMapper.toVisitDto(visit);
-        headers.setLocation(UriComponentsBuilder.newInstance().path("/api/visits/{id}").buildAndExpand(visit.getId()).toUri());
+        headers.setLocation(UriComponentsBuilder.newInstance()
+                .path("/api/visits/{id}")
+                .buildAndExpand(visit.getId())
+                .toUri());
         return new ResponseEntity<>(visitDto, headers, HttpStatus.CREATED);
     }
 
@@ -106,5 +106,4 @@ public class VisitRestController implements VisitsApi {
         this.clinicService.deleteVisit(visit);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
-
 }

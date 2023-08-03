@@ -17,7 +17,6 @@ package org.springframework.samples.petclinic.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.MappedSuperclass;
-
 import jakarta.validation.constraints.NotEmpty;
 
 /**
@@ -51,6 +50,4 @@ public class Person extends BaseEntity {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
-
-
 }

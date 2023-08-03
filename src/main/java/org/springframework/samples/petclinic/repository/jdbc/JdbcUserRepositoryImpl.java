@@ -2,9 +2,7 @@ package org.springframework.samples.petclinic.repository.jdbc;
 
 import java.util.HashMap;
 import java.util.Map;
-
 import javax.sql.DataSource;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.dao.DataAccessException;
@@ -38,7 +36,8 @@ public class JdbcUserRepositoryImpl implements UserRepository {
 
         try {
             getByUsername(user.getUsername());
-            this.namedParameterJdbcTemplate.update("UPDATE users SET password=:password, enabled=:enabled WHERE username=:username", parameterSource);
+            this.namedParameterJdbcTemplate.update(
+                    "UPDATE users SET password=:password, enabled=:enabled WHERE username=:username", parameterSource);
         } catch (EmptyResultDataAccessException e) {
             this.insertUser.execute(parameterSource);
         } finally {
@@ -50,8 +49,8 @@ public class JdbcUserRepositoryImpl implements UserRepository {
 
         Map<String, Object> params = new HashMap<>();
         params.put("username", username);
-        return this.namedParameterJdbcTemplate.queryForObject("SELECT * FROM users WHERE username=:username",
-            params, BeanPropertyRowMapper.newInstance(User.class));
+        return this.namedParameterJdbcTemplate.queryForObject(
+                "SELECT * FROM users WHERE username=:username", params, BeanPropertyRowMapper.newInstance(User.class));
     }
 
     private void updateUserRoles(User user) {
@@ -61,7 +60,8 @@ public class JdbcUserRepositoryImpl implements UserRepository {
         for (Role role : user.getRoles()) {
             params.put("role", role.getName());
             if (role.getName() != null) {
-                this.namedParameterJdbcTemplate.update("INSERT INTO roles(username, role) VALUES (:username, :role)", params);
+                this.namedParameterJdbcTemplate.update(
+                        "INSERT INTO roles(username, role) VALUES (:username, :role)", params);
             }
         }
     }

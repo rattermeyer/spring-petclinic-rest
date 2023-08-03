@@ -1,11 +1,10 @@
 package org.springframework.samples.petclinic.mapper;
 
-import org.mapstruct.Mapper;
-import org.springframework.samples.petclinic.rest.dto.VetDto;
-import org.springframework.samples.petclinic.model.Vet;
-import org.springframework.samples.petclinic.rest.dto.VetFieldsDto;
-
 import java.util.Collection;
+import org.mapstruct.Mapper;
+import org.springframework.samples.petclinic.model.Vet;
+import org.springframework.samples.petclinic.rest.dto.VetDto;
+import org.springframework.samples.petclinic.rest.dto.VetFieldsDto;
 
 /**
  * Map Vet & VetoDto using mapstruct

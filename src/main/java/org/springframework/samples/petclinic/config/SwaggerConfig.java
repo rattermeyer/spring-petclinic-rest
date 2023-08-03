@@ -16,17 +16,14 @@
 
 package org.springframework.samples.petclinic.config;
 
-
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-
-import java.util.Collections;
-
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Contact;
 import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.info.License;
+import java.util.Collections;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 /**
  * Java config for Springfox swagger documentation plugin
@@ -39,12 +36,16 @@ public class SwaggerConfig {
     @Bean
     OpenAPI customOpenAPI() {
 
-        return new OpenAPI().components(new Components()).info(new Info()
-                .title("REST Petclinic backend Api Documentation").version("1.0")
-                .termsOfService("Petclinic backend terms of service")
-                .description(
-                        "This is REST API documentation of the Spring Petclinic backend. If authentication is enabled, when calling the APIs use admin/admin")
-                .license(swaggerLicense()).contact(swaggerContact()));
+        return new OpenAPI()
+                .components(new Components())
+                .info(new Info()
+                        .title("REST Petclinic backend Api Documentation")
+                        .version("1.0")
+                        .termsOfService("Petclinic backend terms of service")
+                        .description(
+                                "This is REST API documentation of the Spring Petclinic backend. If authentication is enabled, when calling the APIs use admin/admin")
+                        .license(swaggerLicense())
+                        .contact(swaggerContact()));
     }
 
     private Contact swaggerContact() {
@@ -62,5 +63,4 @@ public class SwaggerConfig {
         petClinicLicense.setExtensions(Collections.emptyMap());
         return petClinicLicense;
     }
-
 }

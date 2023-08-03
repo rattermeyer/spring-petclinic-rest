@@ -15,15 +15,13 @@
  */
 package org.springframework.samples.petclinic.model;
 
-import org.springframework.beans.support.MutableSortDefinition;
-import org.springframework.beans.support.PropertyComparator;
-import org.springframework.core.style.ToStringCreator;
-
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotEmpty;
 import java.util.*;
-
+import org.springframework.beans.support.MutableSortDefinition;
+import org.springframework.beans.support.PropertyComparator;
+import org.springframework.core.style.ToStringCreator;
 
 /**
  * Simple JavaBean domain object representing an owner.
@@ -51,7 +49,6 @@ public class Owner extends Person {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "owner", fetch = FetchType.EAGER)
     private Set<Pet> pets;
-
 
     public String getAddress() {
         return this.address;
@@ -136,14 +133,13 @@ public class Owner extends Person {
     @Override
     public String toString() {
         return new ToStringCreator(this)
-
-            .append("id", this.getId())
-            .append("new", this.isNew())
-            .append("lastName", this.getLastName())
-            .append("firstName", this.getFirstName())
-            .append("address", this.address)
-            .append("city", this.city)
-            .append("telephone", this.telephone)
-            .toString();
+                .append("id", this.getId())
+                .append("new", this.isNew())
+                .append("lastName", this.getLastName())
+                .append("firstName", this.getFirstName())
+                .append("address", this.address)
+                .append("city", this.city)
+                .append("telephone", this.telephone)
+                .toString();
     }
 }

@@ -17,7 +17,6 @@
 package org.springframework.samples.petclinic.util;
 
 import java.util.Collection;
-
 import org.springframework.orm.ObjectRetrievalFailureException;
 import org.springframework.samples.petclinic.model.BaseEntity;
 
@@ -42,7 +41,7 @@ public abstract class EntityUtils {
      * @throws ObjectRetrievalFailureException if the entity was not found
      */
     public static <T extends BaseEntity> T getById(Collection<T> entities, Class<T> entityClass, int entityId)
-        throws ObjectRetrievalFailureException {
+            throws ObjectRetrievalFailureException {
         for (T entity : entities) {
             if (entity.getId() == entityId && entityClass.isInstance(entity)) {
                 return entity;
@@ -50,5 +49,4 @@ public abstract class EntityUtils {
         }
         throw new ObjectRetrievalFailureException(entityClass, entityId);
     }
-
 }

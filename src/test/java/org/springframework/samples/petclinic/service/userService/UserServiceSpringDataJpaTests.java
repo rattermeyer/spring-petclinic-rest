@@ -5,6 +5,4 @@ import org.springframework.test.context.ActiveProfiles;
 
 @SpringBootTest
 @ActiveProfiles({"spring-data-jpa", "hsqldb"})
-class UserServiceSpringDataJpaTests extends AbstractUserServiceTests {
-
-}
+class UserServiceSpringDataJpaTests extends AbstractUserServiceTests {}

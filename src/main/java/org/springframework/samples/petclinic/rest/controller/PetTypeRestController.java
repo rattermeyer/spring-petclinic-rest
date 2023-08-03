@@ -16,6 +16,9 @@
 
 package org.springframework.samples.petclinic.rest.controller;
 
+import jakarta.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.List;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,10 +31,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import jakarta.transaction.Transactional;
-import java.util.ArrayList;
-import java.util.List;
-
 @RestController
 @CrossOrigin(exposedHeaders = "errors, content-type")
 @RequestMapping("api")
@@ -39,7 +38,6 @@ public class PetTypeRestController implements PettypesApi {
 
     private final ClinicService clinicService;
     private final PetTypeMapper petTypeMapper;
-
 
     public PetTypeRestController(ClinicService clinicService, PetTypeMapper petTypeMapper) {
         this.clinicService = clinicService;
@@ -72,7 +70,10 @@ public class PetTypeRestController implements PettypesApi {
         HttpHeaders headers = new HttpHeaders();
         final PetType type = petTypeMapper.toPetType(petTypeDto);
         this.clinicService.savePetType(type);
-        headers.setLocation(UriComponentsBuilder.newInstance().path("/api/pettypes/{id}").buildAndExpand(type.getId()).toUri());
+        headers.setLocation(UriComponentsBuilder.newInstance()
+                .path("/api/pettypes/{id}")
+                .buildAndExpand(type.getId())
+                .toUri());
         return new ResponseEntity<>(petTypeMapper.toPetTypeDto(type), headers, HttpStatus.CREATED);
     }
 
@@ -99,5 +100,4 @@ public class PetTypeRestController implements PettypesApi {
         this.clinicService.deletePetType(petType);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
-
 }

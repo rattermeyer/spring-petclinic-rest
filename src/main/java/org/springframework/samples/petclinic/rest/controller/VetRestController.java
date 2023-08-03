@@ -15,6 +15,9 @@
  */
 package org.springframework.samples.petclinic.rest.controller;
 
+import jakarta.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.List;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,14 +32,9 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import jakarta.transaction.Transactional;
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * @author Vitaliy Fedoriv
  */
-
 @RestController
 @CrossOrigin(exposedHeaders = "errors, content-type")
 @RequestMapping("api")
@@ -65,7 +63,7 @@ public class VetRestController implements VetsApi {
 
     @PreAuthorize("hasRole(@roles.VET_ADMIN)")
     @Override
-    public ResponseEntity<VetDto> getVet(Integer vetId)  {
+    public ResponseEntity<VetDto> getVet(Integer vetId) {
         Vet vet = this.clinicService.findVetById(vetId);
         if (vet == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -79,13 +77,16 @@ public class VetRestController implements VetsApi {
         HttpHeaders headers = new HttpHeaders();
         Vet vet = vetMapper.toVet(vetDto);
         this.clinicService.saveVet(vet);
-        headers.setLocation(UriComponentsBuilder.newInstance().path("/api/vets/{id}").buildAndExpand(vet.getId()).toUri());
+        headers.setLocation(UriComponentsBuilder.newInstance()
+                .path("/api/vets/{id}")
+                .buildAndExpand(vet.getId())
+                .toUri());
         return new ResponseEntity<>(vetMapper.toVetDto(vet), headers, HttpStatus.CREATED);
     }
 
     @PreAuthorize("hasRole(@roles.VET_ADMIN)")
     @Override
-    public ResponseEntity<VetDto> updateVet(Integer vetId,VetDto vetDto)  {
+    public ResponseEntity<VetDto> updateVet(Integer vetId, VetDto vetDto) {
         Vet currentVet = this.clinicService.findVetById(vetId);
         if (currentVet == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

@@ -27,6 +27,4 @@ import org.springframework.test.context.ActiveProfiles;
  */
 @SpringBootTest
 @ActiveProfiles({"jdbc", "hsqldb"})
-class ClinicServiceJdbcTests extends AbstractClinicServiceTests {
-
-}
+class ClinicServiceJdbcTests extends AbstractClinicServiceTests {}

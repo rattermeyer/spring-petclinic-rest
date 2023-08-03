@@ -16,6 +16,9 @@
 
 package org.springframework.samples.petclinic.rest.controller;
 
+import jakarta.transaction.Transactional;
+import java.util.Collection;
+import java.util.List;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,14 +37,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import jakarta.transaction.Transactional;
-import java.util.Collection;
-import java.util.List;
-
 /**
  * @author Vitaliy Fedoriv
  */
-
 @RestController
 @CrossOrigin(exposedHeaders = "errors, content-type")
 @RequestMapping("/api")
@@ -55,10 +53,8 @@ public class OwnerRestController implements OwnersApi {
 
     private final VisitMapper visitMapper;
 
-    public OwnerRestController(ClinicService clinicService,
-                               OwnerMapper ownerMapper,
-                               PetMapper petMapper,
-                               VisitMapper visitMapper) {
+    public OwnerRestController(
+            ClinicService clinicService, OwnerMapper ownerMapper, PetMapper petMapper, VisitMapper visitMapper) {
         this.clinicService = clinicService;
         this.ownerMapper = ownerMapper;
         this.petMapper = petMapper;
@@ -98,7 +94,9 @@ public class OwnerRestController implements OwnersApi {
         this.clinicService.saveOwner(owner);
         OwnerDto ownerDto = ownerMapper.toOwnerDto(owner);
         headers.setLocation(UriComponentsBuilder.newInstance()
-            .path("/api/owners/{id}").buildAndExpand(owner.getId()).toUri());
+                .path("/api/owners/{id}")
+                .buildAndExpand(owner.getId())
+                .toUri());
         return new ResponseEntity<>(ownerDto, headers, HttpStatus.CREATED);
     }
 
@@ -140,8 +138,10 @@ public class OwnerRestController implements OwnersApi {
         pet.setOwner(owner);
         this.clinicService.savePet(pet);
         PetDto petDto = petMapper.toPetDto(pet);
-        headers.setLocation(UriComponentsBuilder.newInstance().path("/api/pets/{id}")
-            .buildAndExpand(pet.getId()).toUri());
+        headers.setLocation(UriComponentsBuilder.newInstance()
+                .path("/api/pets/{id}")
+                .buildAndExpand(pet.getId())
+                .toUri());
         return new ResponseEntity<>(petDto, headers, HttpStatus.CREATED);
     }
 
@@ -155,9 +155,10 @@ public class OwnerRestController implements OwnersApi {
         visit.setPet(pet);
         this.clinicService.saveVisit(visit);
         VisitDto visitDto = visitMapper.toVisitDto(visit);
-        headers.setLocation(UriComponentsBuilder.newInstance().path("/api/visits/{id}")
-            .buildAndExpand(visit.getId()).toUri());
+        headers.setLocation(UriComponentsBuilder.newInstance()
+                .path("/api/visits/{id}")
+                .buildAndExpand(visit.getId())
+                .toUri());
         return new ResponseEntity<>(visitDto, headers, HttpStatus.CREATED);
     }
-
 }

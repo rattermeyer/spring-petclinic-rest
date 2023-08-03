@@ -9,9 +9,6 @@ import org.springframework.test.context.ActiveProfiles;
  * @author Michael Isvy
  * @see AbstractClinicServiceTests AbstractClinicServiceTests for more details. </p>
  */
-
 @SpringBootTest
 @ActiveProfiles({"spring-data-jpa", "hsqldb"})
-class ClinicServiceSpringDataJpaTests extends AbstractClinicServiceTests {
-
-}
+class ClinicServiceSpringDataJpaTests extends AbstractClinicServiceTests {}

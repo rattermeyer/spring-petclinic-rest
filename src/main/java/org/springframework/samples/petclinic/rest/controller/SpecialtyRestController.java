@@ -16,6 +16,9 @@
 
 package org.springframework.samples.petclinic.rest.controller;
 
+import jakarta.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.List;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,14 +31,9 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import jakarta.transaction.Transactional;
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * @author Vitaliy Fedoriv
  */
-
 @RestController
 @CrossOrigin(exposedHeaders = "errors, content-type")
 @RequestMapping("api")
@@ -77,7 +75,10 @@ public class SpecialtyRestController implements SpecialtiesApi {
         HttpHeaders headers = new HttpHeaders();
         Specialty specialty = specialtyMapper.toSpecialty(specialtyDto);
         this.clinicService.saveSpecialty(specialty);
-        headers.setLocation(UriComponentsBuilder.newInstance().path("/api/specialties/{id}").buildAndExpand(specialty.getId()).toUri());
+        headers.setLocation(UriComponentsBuilder.newInstance()
+                .path("/api/specialties/{id}")
+                .buildAndExpand(specialty.getId())
+                .toUri());
         return new ResponseEntity<>(specialtyMapper.toSpecialtyDto(specialty), headers, HttpStatus.CREATED);
     }
 
@@ -104,5 +105,4 @@ public class SpecialtyRestController implements SpecialtiesApi {
         this.clinicService.deleteSpecialty(specialty);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
-
 }

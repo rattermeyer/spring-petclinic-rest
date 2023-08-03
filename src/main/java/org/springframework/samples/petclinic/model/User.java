@@ -1,8 +1,6 @@
 package org.springframework.samples.petclinic.model;
 
-import java.util.HashSet;
-import java.util.Set;
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -10,8 +8,8 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -64,7 +62,7 @@ public class User {
 
     @JsonIgnore
     public void addRole(String roleName) {
-        if(this.roles == null) {
+        if (this.roles == null) {
             this.roles = new HashSet<>();
         }
         Role role = new Role();

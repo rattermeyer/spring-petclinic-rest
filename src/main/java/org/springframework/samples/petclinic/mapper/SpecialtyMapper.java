@@ -1,10 +1,9 @@
 package org.springframework.samples.petclinic.mapper;
 
-import org.mapstruct.Mapper;
-import org.springframework.samples.petclinic.rest.dto.SpecialtyDto;
-import org.springframework.samples.petclinic.model.Specialty;
-
 import java.util.Collection;
+import org.mapstruct.Mapper;
+import org.springframework.samples.petclinic.model.Specialty;
+import org.springframework.samples.petclinic.rest.dto.SpecialtyDto;
 
 /**
  * Map Specialty & SpecialtyDto using mapstruct
@@ -18,5 +17,4 @@ public interface SpecialtyMapper {
     Collection<SpecialtyDto> toSpecialtyDtos(Collection<Specialty> specialties);
 
     Collection<Specialty> toSpecialtys(Collection<SpecialtyDto> specialties);
-
 }

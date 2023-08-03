@@ -15,8 +15,6 @@
  */
 package org.springframework.samples.petclinic.model;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import java.time.LocalDate;
@@ -50,14 +48,12 @@ public class Visit extends BaseEntity {
     @JoinColumn(name = "pet_id")
     private Pet pet;
 
-
     /**
      * Creates a new instance of Visit for the current date
      */
     public Visit() {
         this.date = LocalDate.now();
     }
-
 
     /**
      * Getter for property date.
@@ -112,5 +108,4 @@ public class Visit extends BaseEntity {
     public void setPet(Pet pet) {
         this.pet = pet;
     }
-
 }
