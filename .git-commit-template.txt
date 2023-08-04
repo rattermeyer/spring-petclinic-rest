@@ -1,0 +1,73 @@
+##################################################
+# Write a title summarizing what this commit does.
+# Start with an uppercase imperative verb, such as
+# Add, Drop, Fix, Refactor, Bump; see ideas below.
+# Think of your title as akin to an email subject,
+# so you don't need to end with a sentence period.
+# Use 50 char maximum, which is this line's width.
+##################################################
+# Conventional commits
+# see https://www.conventionalcommits.org/en/v1.0.0/#summary (and below)
+#<type>[(optional <scope>)]: <description>
+#
+#[optional <body>]
+#
+#[optional <footer(s)>]
+
+# type: build, chore, ci, docs, feat, fix, perf, refactor, revert, style, test
+
+########################################################################
+# Why is this change happening?
+# Describe the purpose, such as a goal, or use case, or user story, etc.
+# For every line, use 72 char maximum width, which is this line's width.
+########################################################################
+#Why:
+
+########################################################################
+# How is this change happening?
+# Describe any relevant algorithms, protocols, implementation spec, etc.
+# For every line, use 72 char maximum width, which is this line's width.
+########################################################################
+#How:
+
+########################################################################
+# Add any tags you want, such as search text, hashtags, keywords, codes.
+# For every line, use 72 char maximum width, which is this line's width.
+########################################################################
+#Tags:
+
+### GIT TRAILERS -- THESE MUST BE LAST IN THE COMMIT MESSAGE ###
+# Provide links to any relevant tickets, articles or other resources
+#
+# See:
+# Co-authored-by: Alice Adams <alice@example.com>
+# Sponsored-by: Adam Anderson <adam@example.com>
+# Close / Closes / Closed:
+# Fix / Fixes / Fixed:
+# Resolve / Resolves / Resolved:
+
+
+# ## Help ##
+#
+# Stick to Conventiona Commits, see: https://www.conventionalcommits.org/en/v1.0.0/#summary
+# types: as defined by https://github.com/conventional-changelog/commitlint/tree/master/@commitlint/config-conventional
+# examples
+#  feat(parser): add ability to parse arrays
+#
+# reference: https://www.conventionalcommits.org/en/v1.0.0/#summary
+#
+# For the subject line:
+#   * Use 50 characters maximum.
+#   * Do not use a sentence-ending period.
+#
+# A properly formed Git commit subject line should always be able to complete the following sentence:
+#
+# If applied, this commit will your subject line here
+# For example: If applied, this commit will refactor subsystem X for readability
+#
+# For the body text:
+#   * Use as many lines as you like.
+#   * Use 72 characters maximum per line for typical word wrap text.
+#
+#
+# For research see, e.g. What makes a good commit message, ICSE22, https://dlnext.acm.org/doi/10.1145/3510003.3510205
