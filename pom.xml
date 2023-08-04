@@ -305,6 +305,25 @@
                             </configOptions>
                         </configuration>
                     </execution>
+                    <execution>
+                        <id>openapi-generate-asciidoc</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <inputSpec>${project.basedir}/src/main/resources/openapi.yml</inputSpec>
+                            <generatorName>asciidoc</generatorName>
+                            <!-- FIXME: we link from examples to the generated documentation -->
+                            <!-- pro: we do not generate new / changed files -->
+                            <!-- cons: might not directly work on windows -->
+                            <!-- alternative: use a different example as output directory -->
+                            <!-- <output>${project.basedir}/docs/modules/api/examples</output> -->
+                            <configOptions>
+                                <headerAttributes>false</headerAttributes>
+                            </configOptions>
+                        </configuration>
+                    </execution>
                 </executions>
             </plugin>
             <plugin>
