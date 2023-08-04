@@ -267,16 +267,20 @@
                 <version>${openapi-generator-maven-plugin.version}</version>
                 <!-- /RELEASE_VERSION -->
                 <executions>
+                    <!-- FIXME: if you have multiple openapi specs as input, you must duplicate this block -->
                     <execution>
+                        <id>openapi-generate-spring</id>
                         <goals>
                             <goal>generate</goal>
                         </goals>
                         <configuration>
+                            <!-- FIXME: The input specification file to use -->
                             <inputSpec>${project.basedir}/src/main/resources/openapi.yml</inputSpec>
                             <generatorName>spring</generatorName>
                             <library>spring-boot</library>
 
-                            <!-- Only enabling model andopenapi-generator-maven-plugin API generation -->
+                            <!-- Only enabling model and API generation -->
+                            <!-- FIXME: package naming must be adopted -->
                             <modelNameSuffix>Dto</modelNameSuffix>
                             <apiPackage>org.springframework.samples.petclinic.rest.api</apiPackage>
                             <generateModels>true</generateModels>
