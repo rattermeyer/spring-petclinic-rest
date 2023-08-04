@@ -429,6 +429,7 @@
                 <configuration>
                     <!-- optional: limit format enforcement to just the files changed by this feature branch -->
                     <!-- this is for gradually enforcing formatting on a existing codebase -->
+                    <!-- FIXME: this should point to a correct git ref like origin/main or origin/master -->
                     <ratchetFrom>rattermeyer/master</ratchetFrom>
                     <!-- define a language-specific format -->
                     <java>
@@ -454,7 +455,14 @@
                     </execution>
                     <execution>
                         <id>spotless-apply</id>
-                        <phase>package</phase>
+                        <phase>process-sources</phase>
+                        <goals>
+                            <goal>apply</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>spotless-apply-test</id>
+                        <phase>process-test-sources</phase>
                         <goals>
                             <goal>apply</goal>
                         </goals>
