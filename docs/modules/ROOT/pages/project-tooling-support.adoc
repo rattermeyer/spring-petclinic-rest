@@ -110,6 +110,10 @@ It compares two OpenAPI specifications and reports breaking changes.
 The standard is defined to fail the build on breaking changes but not on non-breaking changes.
 This is configured in the `pom.xml` file.
 
+=== Git build info
+
+The build includes a maven plugin, that generates git build information, that can be used in the `actuator/info` endpoint.
+
 === Maven Build Cache Support
 
 The Maven build is configured with the new https://maven.apache.org/extensions/maven-build-cache-extension/[maven build cache support].
