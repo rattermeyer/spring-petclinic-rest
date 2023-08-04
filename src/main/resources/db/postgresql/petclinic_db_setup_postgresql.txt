@@ -12,9 +12,9 @@
 
 
 2) Open psql and create the PetClinic database:
- 
-	CREATE DATABASE petclinic
-  	WITH OWNER = postgres
+
+    CREATE DATABASE petclinic
+    WITH OWNER = postgres
        ENCODING = 'UTF8'
        TABLESPACE = pg_default
        CONNECTION LIMIT = -1;
