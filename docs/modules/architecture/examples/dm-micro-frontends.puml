@@ -1,0 +1,29 @@
+@startuml
+!include https://raw.githubusercontent.com/rattermeyer/dm-plantuml/main/decision-map.puml
+
+driver(independence, "Independent Developer Teams")
+driver(unifiedUI, "Unified UI")
+driver(sleekUI, "Sleek UI")
+driver(lockInFree, "Lock-in free")
+driver(coexistenceOfDifferentTechnologies, "Co-exisitence of Technologies")
+driver(futureProof, "Future Proof")
+
+decision(microfrontends, "Micro Frontends")
+decision(webComponents, "Web Components")
+decision(edDesignSystem, "ed Design System / Pattern Library")
+decision(react, "React")
+decision(commonJSLibraries, "common JS Libraries")
+
+influences(futureProof, coexistenceOfDifferentTechnologies)
+influences(coexistenceOfDifferentTechnologies, microfrontends)
+influences(coexistenceOfDifferentTechnologies, webComponents)
+influences(microfrontends, webComponents)
+influences(lockInFree, microfrontends)
+influences(sleekUI, microfrontends)
+influences(independence, microfrontends)
+influences(unifiedUI, edDesignSystem)
+influences(sleekUI, react)
+influences(microfrontends, commonJSLibraries)
+influences(microfrontends, edDesignSystem)
+
+@enduml

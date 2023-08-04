@@ -1,0 +1,178 @@
+= Microfrontends
+Max Mustermann
+// In der nächsten Zeile die Version / Datum des Engineering Handbuchs angeben, in dem der ADR erschienen oder
+// überarbeitet wurde. Hinter dem Doppelpunkt kann ein kurzer informativer Text erscheinen, der die
+// Hauptänderung darstellt
+v00.0, 1.1.1970: Initialerstellung
+// Einige hilfreiche Stichpunkte, die im Inhaltsverzeichnis angezeigt werden
+:keywords: frontend
+// Wer (einzelner oder Team), der den Vorschlag abgenommen hat (Team, Architekt, ...)
+:approvers: Big Boss (Solution Architekt)
+// Wer hat Input für die Vorbereitung dieses ADRs geliefert?
+:contributors: Alice, Bob
+// Wer muss über die Änderungen informiert werden?
+// Beispiele: Team | Betrieb | Projektmanagement | ...
+:informed: Team
+// STATUS: PROPOSED | ACCEPTED | REPLACED | REJECTED
+:status: {ACCEPTED}
+////
+Wenn der ADR durch einen neueren ersetzt wurde, dann
+sollte die nächste Zeile wieder einkommentiert und der Link angepasst werden.
+////
+//:superseded-by: xref::0471-adr[ADR-4711]
+
+[cols="1h,3"]
+|===
+|Status
+|*{status}*
+
+|Letzte Reevaluation
+|{revdate}: {revremark}
+
+|(Last) Approvers
+|{approvers}
+
+|Contributors
+|{contributors}
+
+|Informed
+|{informed}
+
+|Stichworte
+|{keywords}
+
+ifdef::superseded-by[]
+|Ersetzt durch
+|{superseded-by}
+endif::[]
+|===
+
+== Context and Problem Description
+////
+Beschreibe hier den Kontext und das Problem für das eine Entscheidung herbeigeführt werden muss
+////
+Larger product and will be developed by multiple teams.
+It was decided that the different teams should work on different, non overlapping business functions.
+Therefore, we use a Micro-Service approach for Backend services. With this context in mind we need a corresponding solution for the development of edorga frontend by multiple teams.
+The frontend development solution should aim for the following goals and requirements
+
+== Architectural Drivers, Forces and Assumptions
+////
+Liste alle für die Entscheidung relevanten Architekturtreiber bzw. Annahmen auf.
+List all constraints that were taken into considerations as well
+////
+Independence between separate development teams to achieve short lead times (from idea to production)
+
+* Independent development
+* Independent build and release
+* Independent deployment
+
+Support the creation of a unified UI
+
+* Single Sign Onwg
+* Unified Look & Feel
+* common styleguide
+* common base components
+* Unified navigation
+
+Enable the implementation of a sleek UI, that is
+
+* Responsive
+* supports mobile devices
+* Fast
+* has short load time
+* and has short reaction time
+
+Last but not least we need to create a sustainable UI
+
+* Extensible
+* No vendor or technology lock-in
+* does not prohibit the use of newer technologies in the future
+* and therefore enables the use of differing technology stacks
+
+== Decision
+
+[IMPORTANT]
+*Building the frontend as a combination of multiple micro frontends*
+
+////
+Begründe im Folgenden die Entscheidung.
+Eine Begründung kann sich auf das OC Partnerökosystem beziehen oder die Verwendung und Passung in
+andere Aufgabenstellungen im aktuell betrachteten Architekturflavour.
+Berücksichtige dabei auch die anderen Standardarchitekturen
+////
+
+* Every Team decides how to split the business functionality into one or more micro frontends.
+* Every Micro Frontend consists of a set of UI components
+* UI components will be wrapped as WebComponents to ensure a good encapsulation and provide us the ability to use other frontend frameworks in later project stages.
+* At the start every Team uses React as standard frontend framework
+* We provide a set of common javascript libraries that will be included at the top level, so that the created WebComponents don't have to include these libraries
+* We provide a Design System / Pattern Library with a standard set of React components, that can be used by the teams and help to create a UI styleguide conforming user interface
+
+.Related Decisions / ADRs
+////
+Binde hier ein Diagramm ein, dass den Zusammenhang mit anderen Architekturkomponenten und -treibern darstellt.
+
+You should also include a list of links to other ADRs
+
+* http://some.url[Title]
+
+////
+[plantuml]
+----
+include::example$architecture/dm-micro-frontends.puml[]
+----
+
+== Consequences
+
+////
+Beschreibe hier die Konsequenzen (positive wie negative) der aktuellen Entscheidung.
+Keine Entscheidung hat nur positive
+
+* Kosten
+* Auswirkungen auf den Betrieb
+* Trade-offs bzgl. anderer Architekturtreiber / Qualitätsattribute
+* Developer Experience
+////
+Using the WebComponent standards (especially custom elements) gives us the possibility, to use other frontend frameworks in combination with react.
+But clearly it is not a goal, to use multiple frameworks.
+
+Using WebComponents will create an overhead
+
+for the teams at development time ==> we try to minimize the additional development effort for WebComponent wrappers
+for the user at runtime ==> we have to minimize the performance impact, therefore we should avoid to have a large number of WebComponents within one page/dialog and we should avoid a large size (bundled javascript) for the WebComponent itself
+
+== Alternatives
+////
+Hier alle Alternativen aufführen einschließlich der gewählten Option.
+////
+
+=== Microservices and a monolithic UI
+////
+Liste hier die einzelnen Alternativen auf und begründe, warum die Alternative aktuell verworfen wurde
+
+* Beschreibung
+* Pros
+* Cons
+* Risiken
+* Geschätzte Kosten
+////
+An often seen alternative is that the backend is organized in a microservice architectural style, but the frontend is developed as a frontend monolith.
+This style was often used in early microservices days, when on the frontend side it was not as easy to create a composite architecture as it is today possible with web components.
+Often, this also led to a technology-oriented, layered team organization with a separate frontend team.
+
+== External References
+////
+List of url / title
+
+* http://some.url[Title]
+////
+* https://micro-frontends.org/[Micro Frontends]
+
+== Lessons Learned
+
+////
+Was habt ihr im Projekt an Erfahrungen mit der Technologie gemacht?
+Was hat sich bewährt?
+Was würdet ihr anders machen?
+////

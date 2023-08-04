@@ -1,0 +1,206 @@
+= Project Tooling Support
+:toc:
+
+This project is configured to support you in different daily routines to make your life easier. The following sections will describe the different tools and how to use them.
+
+== System Requirements
+
+The project has been developed and tested on a Mac.
+It should work on Linux as well but has not been tested on in a native Windows setup (without WSL2).
+
+== Support for sdkman autoconf
+
+The project contains an `.sdkmanrc` file specifying the jdk to use.
+
+You can easily switch to this version running `sdk env` in the project root.
+You can also enable https://sdkman.io/usage#config[sdkman autoconf] in your sdkman configuration
+
+[[pre-commit, Pre-Commit Framework]]
+== Support for pre-commit Framework
+
+If you have https://pre-commit.com/[pre-commit] installed on your system, you can enable pre-commit hooks in this project.
+
+[source,bash]
+----
+pre-commit install --install-hooks -t pre-commit -t commit-msg
+----
+
+The project contains a `.pre-commit-config.yaml` file specifying a set of git pre-commit hooks.
+
+=== Upgrading pre-commit hooks
+
+You can upgrade the pre-commit hooks using:
+
+[source,bash]
+----
+pre-commit autoupdate
+----
+
+=== Linters
+
+The following linters are configured as part of the pre-commit framework
+
+* https://github.com/markdownlint/markdownlint[markdownlint]
+** You can configure the linter using `.mdl_style.rb` and `.mdlrc`
+** The config file `.mdlrc` references the custom style file that disables line length rule.
+* https://www.shellcheck.net/[shellcheck]: Shell script linter
+* https://commitlint.js.org/#/[commitlint]: Linter for commit messages
+** Ensures, that commit messages conform to the <<conventional-commits, Conventional Commits>> format.
+* https://github.com/sqlfluff/sqlfluff[sqlfluff]: Linter for SQL files
+** Excluding complete files can be done using `.sqlfluffignore` that currently disables mysql and hsqldb files
+
+=== Fixers
+
+Some hooks directly modify the source files to fix some issues.
+Most notably, this script invokes `spotless:apply` to enforce a consistent code style.
+
+== Maven Build
+
+=== Support for antora documentation
+
+The Maven build file contains the new `antora-maven-plugin` that allows to build the technical module documentation.
+See <<antora-documentation,Antora Documentation>> for more details.
+
+NOTE: The antora plugin is not automatically executed as part of the build.
+Generating the documentation when nothing has changed slows down the build.
+Most of the builds are triggered because of simple code changes.
+
+=== Support for Spotless
+
+We use the https://github.com/diffplug/spotless/tree/main/plugin-maven[Spotless Maven Plugin] to check and format  code against some standard code style conventions.
+
+Currently, `spotless:check` is bound to the `verify` phase and `spotless:apply` is bound to the `process-sources` and the `process-test-sources` phase.
+
+The formatter respects the `@formatter:off` and `@formatter:on` markers to exclude some parts of the code from formatting.
+
+Currently it uses the https://github.com/palantir/palantir-java-format[Palantir Java Format] to format Java code that is based on the google java style guide.
+
+=== Support for OpenAPI Generator
+
+Because we prefer an API-first approach, we use the `openapi-generator` to generate the Java server stubs from the OpenAPI specification.
+This is at least true for non-private APIs.
+
+This could also be extended to generate client stubs as well, if required.
+
+There are two generators configured
+
+* Spring: for the Spring Boot based server stubs
+* AsciiDoc: for the AsciiDoc documentation
+
+The AsciiDoc file is linked from `docs/modues/api/examples/openapi.adoc`.
+
+This allows to combine generated documentation with manually written documentation.
+
+=== Support for API linting
+
+We have provided a rather complete REST API guideline.
+This is too complex to be checked manually.
+Therefore, we use https://github.com/stoplightio/spectral[Spectral] to lint the OpenAPI specification against the guideline.
+
+It is configured using `.spectral.yml`.
+
+Linting runs as part of the `test` phase.
+The report is generated in the JUnit format under at `TEST-openapi-lint.xml`.
+
+=== Support for API diffing
+
+To be sure to not create breaking changing, we use the `openapi-diff` tool.
+It compares two OpenAPI specifications and reports breaking changes.
+
+The standard is defined to fail the build on breaking changes but not on non-breaking changes.
+This is configured in the `pom.xml` file.
+
+=== Maven Build Cache Support
+
+The Maven build is configured with the new https://maven.apache.org/extensions/maven-build-cache-extension/[maven build cache support].
+
+No specific configuration has been provided and the default configuration is used.
+
+== Gitlab Merge Templates
+
+Example merge request templates are provided in the `.gitlab/merge_request_templates` folder.
+
+== Git
+
+=== Git Hooks
+Git supports running scripts using a hook system.
+Managing these hooks manually is cumbersome.
+One solution for easier configuration is the https://pre-commit.com/[pre-commit] framework.
+This project contains configuration for the pre-commit framework as described in the secion <<pre-commit>>.
+
+=== Git Commit Templates
+The project contains a https://github.com/joelparkerhenderson/git-commit-template[commit template].
+
+You can configure this for the project using:
+
+[source,bash]
+----
+git config --local commit.template .git-commit-template.txt
+----
+
+This contains some hints how to write good commit messages following the <<conventional-commits, Conventional Commits>> format.
+
+[[antora-documentation]]
+== Antora Documentation
+
+The project contains a `docs` folder that contains the documentation for module.
+According to the conventions, technical documentation should be versions along the code and be versioned together with the code.
+
+You can call `mvn antora:generate` to generate the documentation.
+
+You can also call `npx antora generate docs/antora-playbook.yml` to generate the documentation in the root folder of the project.
+
+The documentation is generated in the `target/antora/site` folder.
+
+If you want to generate diagrams, you need a running `kroki` instance somewhere.
+A docker-compose file is provided in `docs/kroki` that you can use to start a local instance.
+
+As a starting point the docs folder contains the following modules:
+
+ROOT::
+Intended for the general overview of the modul from a technical point of view.
+This should provide the audience with pointers where to look for more details.
+
+architecture::
+This is an arc42 template for documenting the architecture of the module.
+
+api::
+This is where API documentation should be placed.
+The maven `generate-sources` lifecycle phase also generates asciidoc based documentation from the OpenAPI specification.
+This module allows to combine hand-written documentation with generated documentation.
+
+[[conventional-commits]]
+== Conventional Commits
+Commit messages should be created using the https://www.conventionalcommits.org/en/v1.0.0/[conventional commit] format.
+When you are using the https://pre-commit.com/[pre-commit] framework, this is automatically checked.
+
+Using conventional commits allows to easily create a Changelog.
+
+The project contains `cliff.toml` that configures the https://github.com/orhun/git-cliff[git-cliff] tool to generate a changelog.
+It is configured to use the detailed format template.
+
+As an example, you can simply try the following command (assuming you have git-cliff installed):
+
+[source,bash]
+----
+git cliff ef2acf5b0b..HEAD
+----
+
+That generates a markdown changelog of some commits.
+You should check http://github.com/orhun/git-cliff[git-cliff] for more details.
+
+[[customizing]]
+
+
+== Customizing the reference project
+
+The project contains a lot of "FIXME" comments that you should review and adapt to your needs.
+
+If you have https://github.com/BurntSushi/ripgrep[ripgrep] installed, you can easily list files containing "FIXME" comments using:
+
+[source,bash]
+----
+rg -. -l "FIXME" -g '!node_modules/**' -g '!docs/build/**'
+----
+
+Or using IntelliJ `TODO` tool window.

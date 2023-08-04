@@ -1,0 +1,50 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+!include <C4/C4_Container>
+!include <C4/C4_Component>
+
+Container(browser, "Browser", "")
+
+System_Boundary(itsystem, "Service Implementation") {
+    Component(springMVC, "Service API", "Spring MVC")
+    Component(functionalImplementation, "Functional Implementation", "Spring Framework / Java")
+    Component(beanMapping, "Bean Mapping", "Mapstruct")
+    Component(serviceMonitoringInt, "Service Monitoring", "Spring Actuator")
+    Component(authNInt, "AuthN / AuthZ", "Spring Security")
+    Component(bff, "Backend-for-Frontend", "GraphQL")
+    Component(dataStorageAndRetrieval, "Data Storage and Retrieval", "JPA / Hibernate Types")
+
+    Component(serviceTracingInt, "Service Tracing", "opentracing / java-spring-cloud")
+    Component(logGeneration, "Log Generation", "logback")
+
+    Lay_D(serviceMonitoringInt, authNInt)
+    Lay_D(authNInt,dataStorageAndRetrieval)
+    Lay_D(bff,beanMapping)
+    Lay_R(beanMapping,functionalImplementation)
+
+    Lay_R(serviceMonitoringInt, serviceTracingInt)
+    Lay_R(dataStorageAndRetrieval, logGeneration)
+    Lay_R(logGeneration, serviceTracingInt)
+    Lay_R(serviceTracingInt, serviceMonitoringInt)
+
+    Lay_R(serviceMonitoringInt,serviceTracingInt)
+
+}
+System_Ext(serviceMonitoringExt, "Service Monitoring", "Prometheus")
+System_Ext(authNExt, "AuthN / AuthZ", "Keycloak")
+System_Ext(serviceTracingExt, "Service Tracing", "elastic APM")
+System_Ext(logManagementExt, "Log Managment", "elastic")
+System_Ext(restClient, "Rest Client")
+ContainerDb_Ext(dataStore, "RDBMS", "PostgreSQL")
+
+Rel(serviceMonitoringExt, serviceMonitoringInt, "[REST / HTTP]")
+Rel_R(authNInt, authNExt, "[REST / HTTPS]")
+Rel(dataStorageAndRetrieval,dataStore, "[PostgreSQL protocol]")
+
+Rel(serviceTracingInt, serviceTracingExt, "-")
+Rel(logGeneration, logManagementExt, "JSONFile")
+
+Rel(browser,bff, "HTTP/WbSocket/RSocket(?)")
+Rel(restClient, springMVC, "[REST / HTTP]")
+@enduml

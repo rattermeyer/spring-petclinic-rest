@@ -1,0 +1,33 @@
+@startuml
+!include https://raw.githubusercontent.com/rattermeyer/dm-plantuml/main/decision-map.puml
+
+driver(maintainability, "Maintainability")
+driver(security, "Security")
+driver(code_quality, "Code Quality")
+driver(usability, "Usability")
+driver(backend_development, "Backend Development")
+driver(fullstack_development, "Fullstack Development")
+driver(frontend_development, "Frontend Development")
+driver(programming_language_support, "Programming Langauge Support")
+
+influences(maintainability, code_quality)
+influences(security, code_quality)
+
+decision(sonarqube, "SonarQube")
+decision(sonarlint, "SonarLint")
+decision(intellij, "IntelliJ")
+decision(vscode, "VS Code")
+
+influences(code_quality, sonarqube)
+influences(sonarqube, sonarlint)
+influences(programming_language_support, sonarqube)
+
+influences(backend_development, intellij)
+influences(fullstack_development, intellij)
+influences(frontend_development, vscode)
+influences(usability, vscode)
+influences(usability, intellij)
+
+influences(intellij, sonarlint)
+influences(vscode, sonarlint)
+@enduml

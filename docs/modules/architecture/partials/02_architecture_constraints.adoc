@@ -1,0 +1,80 @@
+[[section-architecture-constraints]]
+== Architecture Constraints
+
+
+////
+.Contents
+Any requirement that constraints software architects in their freedom of design and implementation decisions or decision about the development process. These constraints sometimes go beyond individual systems and are valid for whole organizations and companies.
+
+.Motivation
+Architects should know exactly where they are free in their design decisions and where they must adhere to constraints.
+Constraints must always be dealt with; they may be negotiable, though.
+
+.Form
+Simple tables of constraints with explanations.
+If needed you can subdivide them into
+technical constraints, organizational and political constraints and
+conventions (e.g. programming or versioning guidelines, documentation or naming conventions)
+
+
+.Further Information
+
+See https://docs.arc42.org/section-2/[Architecture Constraints] in the arc42 documentation.
+
+////
+
+=== Technical Constraints
+
+The defined technical constraints ensure that eurodata can better leverage experiences and skills gained while developing the different products.
+
+.Software and Programming Constraints
+
+[cols="1,2,4"]
+|===
+|Id | Constraint | Background
+
+|TC-0010
+|Backend implementation based on Spring Boot
+| TBD
+
+|TC-0020
+|Backend implementation based in Java
+| TBD
+
+|TC-0030
+|Frontend implementation in TypeScript
+| TBD
+
+|TC-0040
+|Frontend UI Framework based on React
+| TBD
+
+|TC-0060
+|Office Add-Ins are developed using Typescript / React as recommended
+|TBD, see https://learn.microsoft.com/en-us/office/dev/add-ins/develop/yeoman-generator-overview[Microsoft recommendations]
+
+|TC-0050
+|Container-based delivery
+|TBD
+
+|===
+
+.Conventions
+
+[cols="1,2a,4"]
+|===
+|Id | Constraint | Background
+
+|C-0010
+|Technical Documentation
+|Technical documentation is written in ASCIIDoc and placed under version control, see Documentation Guidelines (TBD)
+
+|[[C-0020,C-0020]]C-0020
+|Coding Conventions
+|We apply opinionated code formatting on the source code
+
+|C-0030
+|Language
+|We use English as a project / product language.
+
+|===

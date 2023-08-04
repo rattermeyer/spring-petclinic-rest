@@ -1,0 +1,8 @@
+= ADR Overview
+
+[cols="1,2,3,1"]
+|===
+|ID|Keywords|Summary|Status
+
+|xref:architecture/architecture-decision-records/0001-micro-frontends.adoc[ADR-0001]|frontend|Microfrontends|{ACCEPTED}
+|===

@@ -1,0 +1,45 @@
+name: module-a
+title: Module A
+version: "1.0"
+
+nav:
+  - modules/ROOT/nav.adoc
+  - modules/architecture/nav.adoc
+  - modules/api/nav.adoc
+
+asciidoc:
+  attributes:
+    MUST: |
+      <span style="color: red;font-weight: bold"><strong>MUST</strong></span>
+    REQUIRED: |
+      <span style="color: red;font-weight: bold"><strong>REQUIRED</strong></span>
+    MUST-NOT: |
+      <span style="color: red;font-weight: bold"><strong>MUST NOT</strong></span>
+    RECOMMENDED: |
+      <span style="color: darkgoldenrod"><strong>RECOMMENDED</strong></span>
+    SHOULD: |
+      <span style="color: darkgoldenrod"><strong>SHOULD</strong></span>
+    NOT-RECOMMENDED: |
+      <span style="color: darkgoldenrod"><strong>NOT RECOMMENDED</strong></span>
+    SHOULD-NOT: |
+      <span style="color: darkgoldenrod"><strong>SHOULD NOT</strong></span>
+    OPTIONAL: |
+      <span style="color: green"><strong>OPTIONAL</strong></span>
+    MAY: |
+      <span style="color: green"><strong>MAY</strong></span>
+
+    TODO: |
+      <span style="color: deeppink;font-weight: bold"><strong>TODO</strong></span>
+    OPEN: |
+      <span style="background-color: deeppink;color: white; font-weight: bold;padding: 3"><strong>OPEN</strong></span>
+    DONE: |
+      <span style="background-color: green;color: white; font-weight: bold;padding: 3"><strong>ACCEPTED</strong></span>
+
+    MUST-SHOULD-MAY: |
+      <span style="color: red;font-weight: bold"><strong>MUST</strong></span>-<span style="color: darkgoldenrod"><strong>SHOULD</strong></span>-<span style="color: green"><strong>MAY</strong></span>
+    REJECTED: |
+      <span style="color: red;font-weight: bold"><strong>REJECTED</strong></span>
+    SUPERSEDED: |
+      <span style="color: red;font-weight: bold"><strong>SUPERSEDED</strong></span>
+    ACCEPTED: |
+      <span style="background-color: green;color: white; font-weight: bold;padding: 3"><strong>ACCEPTED</strong></span>

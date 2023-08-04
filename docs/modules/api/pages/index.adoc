@@ -1,3 +1,9 @@
 = API Overview
 
+////
+Include any overview or any additional information on how to use the API that is not present in the OpenAPI specification.
+////
+
 Lorem ipsum
+
+include::example$openapi.adoc[leveloffset=+1]

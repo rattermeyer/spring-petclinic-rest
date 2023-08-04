@@ -1,0 +1,136 @@
+
+= Decision Name
+////
+Die ADR Systematik folgt in etwas abgeänderter Form dem DACI / RFC Ansatz.
+Es stellt aber die Entscheidung, nicht die Optionen in den Vordergrund
+////
+// In der nächsten Zeile diejenigen aufführen, die an der Formulierung mitgearbeitet haben
+Max Mustermann
+// In der nächsten Zeile die Version / Datum des Engineering Handbuchs angeben, in dem der ADR erschienen oder
+// überarbeitet wurde. Hinter dem Doppelpunkt kann ein kurzer informativer Text erscheinen, der die
+// Hauptänderung darstellt
+v00.0, 1.1.1970: Initialerstellung
+// Einige hilfreiche Stichpunkte, die im Inhaltsverzeichnis angezeigt werden
+:keywords: Warp-Antrieb
+// Wer (einzelner oder Team), der den Vorschlag abgenommen hat (Team, Architekt, ...)
+:approvers: Big Boss (Solution Architekt)
+// Wer hat Input für die Vorbereitung dieses ADRs geliefert?
+:contributors: Alice, Bob
+// Wer muss über die Änderungen informiert werden?
+// Beispiele: Team | Betrieb | Projektmanagement | ...
+:informed: Team
+// STATUS: PROPOSED | ACCEPTED | REPLACED | REJECTED
+:status: STATUS
+////
+Wenn der ADR durch einen neueren ersetzt wurde, dann
+sollte die nächste Zeile wieder einkommentiert und der Link angepasst werden.
+////
+//:superseded-by: xref::0471-adr[ADR-4711]
+
+[cols="1h,3"]
+|===
+|Status
+|*{status}*
+
+|Letzte Reevaluation
+|{revdate}: {revremark}
+
+|(Last) Approvers
+|{approvers}
+
+|Contributors
+|{contributors}
+
+|Informed
+|{informed}
+
+|Stichworte
+|{keywords}
+
+ifdef::superseded-by[]
+|Ersetzt durch
+|{superseded-by}
+endif::[]
+|===
+
+== Context and Problem Description
+
+////
+Beschreibe hier den Kontext und das Problem für das eine Entscheidung herbeigeführt werden muss
+////
+
+== Architectural Drivers, Forces and Assumptions
+
+////
+Liste alle für die Entscheidung relevanten Architekturtreiber bzw. Annahmen auf.
+List all constraints that were taken into considerations as well
+////
+
+== Entscheidung
+
+[IMPORTANT]
+*Nutzung von <Tool / Framework / Pattern /Architekturstil>*
+
+////
+Begründe im Folgenden die Entscheidung.
+Eine Begründung kann sich auf das OC Partnerökosystem beziehen oder die Verwendung und Passung in
+andere Aufgabenstellungen im aktuell betrachteten Architekturflavour.
+Berücksichtige dabei auch die anderen Standardarchitekturen
+////
+
+.Related Decisions / ADRs
+////
+Binde hier ein Diagramm ein, dass den Zusammenhang mit anderen Architekturkomponenten und -treibern darstellt.
+
+You should also include a list of links to other ADRs
+
+* http://some.url[Title]
+
+////
+
+== Consequences
+
+////
+Beschreibe hier die Konsequenzen (positive wie negative) der aktuellen Entscheidung.
+Keine Entscheidung hat nur positive
+
+* Kosten
+* Auswirkungen auf den Betrieb
+* Trade-offs bzgl. anderer Architekturtreiber / Qualitätsattribute
+* Developer Experience
+////
+
+== Alternatives
+
+////
+Hier alle Alternativen aufführen einschließlich der gewählten Option.
+////
+
+=== Alternative 1
+////
+Liste hier die einzelnen Alternativen auf und begründe, warum die Alternative aktuell verworfen wurde
+
+* Beschreibung
+* Pros
+* Cons
+* Risiken
+* Geschätzte Kosten
+////
+
+=== Alternative n
+
+== External References
+////
+List of url / title
+
+* http://some.url[Title]
+////
+
+
+== Lessons Learned
+
+////
+Was habt ihr im Projekt an Erfahrungen mit der Technologie gemacht?
+Was hat sich bewährt?
+Was würdet ihr anders machen?
+////

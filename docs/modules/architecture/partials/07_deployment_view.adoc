@@ -1,0 +1,54 @@
+[[section-deployment-view]]
+== Deployment View
+
+=== Infrastructure Level 1
+
+////
+Describe (usually in a combination of diagrams, tables, and text):
+
+* distribution of a system to multiple locations, environments, computers, processors, .., as well as physical connections between them
+* important justifications or motivations for this deployment structure
+* quality and/or performance features of this infrastructure
+* mapping of software artifacts to elements of this infrastructure
+
+For multiple environments or alternative deployments please copy and adapt this section of arc42 for all relevant environments.
+////
+
+_**<Overview Diagram>**_
+
+image::k8s_strategy.drawio.svg[]
+
+Motivation::
+
+Target Runtime Environment is the eurodata Kubernetes Cluster.
+
+Quality and/or Performance Features::
+
+_<explanation in text form>_
+
+Mapping of Building Blocks to Infrastructure::
+_<description of the mapping>_
+
+
+=== Infrastructure Level 2
+
+[role="arc42help"]
+////
+Here you can include the internal structure of (some) infrastructure elements from level 1.
+
+Please copy the structure from level 1 for each selected element.
+////
+
+==== _<Infrastructure Element 1>_
+
+_<diagram + explanation>_
+
+==== _<Infrastructure Element 2>_
+
+_<diagram + explanation>_
+
+...
+
+==== _<Infrastructure Element n>_
+
+_<diagram + explanation>_

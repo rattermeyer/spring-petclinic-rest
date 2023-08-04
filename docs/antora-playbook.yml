@@ -1,0 +1,41 @@
+site:
+  # FIXME: this is ony useful for local development, use the real url for production
+  # the url can be specified at generation time using antora --url, see antora generate --help
+  url: http://127.0.0.1:5001
+  title: Module A Documentation
+  start_page: module-a::index.adoc
+
+content:
+  # FIXME: if you want to point it to a gitlab instance, see https://docs.antora.org/antora/latest/playbook/content-edit-url/
+  edit_url: ~
+  sources:
+  - url: ~+   # resolves to current working directory, see https://docs.antora.org/antora/latest/playbook/content-source-url/
+    start_path: docs
+    branches: HEAD
+
+antora:
+  extensions:
+  - require: "@antora/lunr-extension"
+    index_latest_only: true
+    snippet_length: 100
+
+asciidoc:
+  extensions:
+    - asciidoctor-kroki
+  attributes:
+    kroki-server-url: "http://127.0.0.1:8000" # FIXME: point to a running kroki server (locally or company internal)
+    kroki-fetch-diagram: true
+
+runtime:
+  fetch: true
+
+output:
+  clean: true
+  dir: target/antora/site   # to be consistent with the maven antora plugin
+
+ui:
+  # FIXME: This is only useful, if you have a module customized bundle
+  # Better reference the default eurodata ui
+  # or your product specific ui bundle
+  bundle:
+    url: ./layouts/ed/build/ui-bundle.zip

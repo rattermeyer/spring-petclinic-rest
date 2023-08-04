@@ -1,0 +1,40 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+!include <C4/C4_Context>
+!include <C4/C4_Container>
+
+Enterprise_Boundary(eurodata, "eurodata") {
+    System(product, "the product")
+    System_Ext(anotherProduct, "another ed product")
+    System_Ext(yetAnotherProduct, "yet another ed product")
+    System_Boundary(shared, "shared services") {
+        System_Ext(keycloak, "Keycloak", "Authn / AuthZ and Identity Management")
+        System_Ext(elastic, "Elastic Platform", "Logging, Tracing, APM")
+        System_Ext(prometheus, "Prometheus", "Metrics")
+    }
+}
+
+Enterprise_Boundary(partner, "Partner") {
+   System_Ext(partnerProduct, "Partner Product")
+}
+
+Enterprise_Boundary(taxoffice, "tax office") {
+    Person(toUser, "Tax Office user")
+    Container(officeAddIn, "Office Add In")
+    Container(browser, "Web Browser")
+}
+
+Rel(product, keycloak, "verifies tokens")
+Rel(product, elastic, "provides logs and tracing")
+Rel_U(prometheus, product, "polls metrics")
+Rel(toUser,officeAddIn, "uses")
+Rel(officeAddIn, product, "accesses")
+Rel(toUser,browser, "uses")
+Rel_L(product,anotherProduct, "uses")
+Rel_L(yetAnotherProduct, product, "uses")
+Rel(browser,product,"accesses via GraphQL interface")
+Rel(toUser,keycloak,"authenticates against")
+Rel(partnerProduct,product, "accesses via RESTful Service API")
+
+@enduml
