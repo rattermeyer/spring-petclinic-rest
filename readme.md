@@ -1,25 +1,12 @@
-# Example for an API-first approach demonstrating custom spectral ruleset
+# Example of a backend project
 
-Assuring that an OpenAPI specification is a tedious task.
-This can be simplified using spectral rulesets.
+run
 
-TODO: currently rulesets are included directly in this project.
+```bash
+mvn clean install antora:antora
+```
 
-They are based on [Baloise Ruleset](https://github.com/baloise-incubator/spectral-ruleset)
-And the customizations should be placed into its on git repository which should be referenced instead of project-local rulesets.
-
-Compared to the original project, we have included additional plugins
-
-* openapi-diff: To check for incompatible changes (which we have, because of removed responses)
-* frontend-maven-plugin: to run spectral linting tests
-
-Executions are bound to the `test` phase.
-
-`mvn test`
-
-will result in a breaking build because of incompatible changes.
-
-You need to disable the openapi-diff plugin in the pom to get a successful build.
+and open the generated documentation in the folder `target/site/antora/index.html`
 
 ## REST version of Spring PetClinic Sample Application (spring-framework-petclinic extend)
 
