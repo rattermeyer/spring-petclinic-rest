@@ -394,7 +394,8 @@
                 <version>${spotless.version}</version>
                 <configuration>
                     <!-- optional: limit format enforcement to just the files changed by this feature branch -->
-                    <!-- <ratchetFrom>origin/master</ratchetFrom> -->
+                    <!-- this is for gradually enforcing formatting on a existing codebase -->
+                    <ratchetFrom>rattermeyer/master</ratchetFrom>
                     <!-- define a language-specific format -->
                     <java>
                         <!-- no need to specify files, inferred automatically, but you can if you want -->
