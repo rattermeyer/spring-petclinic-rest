@@ -1,0 +1,3 @@
+src/main/resources/db/hsqldb/
+src/main/resources/db/mysql/
+target/

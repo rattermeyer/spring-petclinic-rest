@@ -5,6 +5,7 @@ repos:
     rev: v4.4.0
     hooks:
       - id: trailing-whitespace
+        args: [--markdown-linebreak-ext=md]
       - id: end-of-file-fixer
       - id: mixed-line-ending
       - id: check-yaml
@@ -12,19 +13,19 @@ repos:
       - id: check-shebang-scripts-are-executable
       - id: check-merge-conflict
 
+  # Markdown linting is configured using .mdlrc and .mdl_style.rb
   - repo: https://github.com/jumanjihouse/pre-commit-hooks
     rev: 3.0.0  # or specific git tag
     hooks:
       - id: shellcheck    # Lints shell scripts, see https://www.shellcheck.net/
-      - id: shfmt         # Auto formats shell scripts, see https://github.com/patrickvane/shfmt
+        exclude: 'mvnw'   # Exclude maven wrapper script, because it is provided by a 3rd party
       - id: markdownlint  # Lint markdown files, see https://github.com/markdownlint/markdownlint
+        args: ['-c', '.mdlrc']
 
-# Ensure that the project at least compiles and source code is formatted to standards
+  # Ensure that source code is formatted to standards when committing
   - repo: https://github.com/ejba/pre-commit-maven
     rev: v0.3.3
     hooks:
-      - id: maven
-        args: [ 'clean compile' ]
       - id: maven-spotless-apply
 
  # sqlfluff lints the sql files, no auto fixing
@@ -32,3 +33,11 @@ repos:
     rev: 2.1.4
     hooks:
       - id: sqlfluff-lint
+
+  # enforcing conventional commits
+  - repo: https://github.com/alessandrojcm/commitlint-pre-commit-hook
+    rev: v9.5.0
+    hooks:
+      - id: commitlint
+        stages: [commit-msg]
+        additional_dependencies: ['@commitlint/config-conventional']
