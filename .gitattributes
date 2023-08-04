@@ -1,0 +1,15 @@
+# Set the default behavior, in case people don't have core.autocrlf set.
+* text=auto
+
+# Shell scripts require LF
+*.sh    text eol=lf diff=sh
+# Windows Batch scripts require CRLF
+*.bat   text eol=crlf
+*.ps1   text eol=crlf
+
+*.txt   text
+*.java  text diff=java
+*.kt    text diff=kotlin
+*.go    text diff=golang
+*.md    text diff=markdown
+*.xml   text diff=xml
