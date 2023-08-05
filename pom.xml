@@ -33,6 +33,7 @@
 
         <!-- Docker -->
         <docker.jib-maven-plugin.version>1.3.0</docker.jib-maven-plugin.version>
+        <docker.jib-maven-plugin.version>3.3.2</docker.jib-maven-plugin.version>
         <docker.image.prefix>springcommunity</docker.image.prefix>
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
         <maven.compiler.source>17</maven.compiler.source>
