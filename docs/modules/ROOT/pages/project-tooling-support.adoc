@@ -156,10 +156,13 @@ You can also call `npx antora generate docs/antora-playbook.yml` to generate the
 
 The documentation is generated in the `target/antora/site` folder.
 
+=== Diagram as Code Support
 If you want to generate diagrams, you need a running `kroki` instance somewhere.
 A docker-compose file is provided in `docs/kroki` that you can use to start a local instance.
 
-As a starting point the docs folder contains the following modules:
+=== Provided Documentation Modules
+
+As a starting point, the docs folder contains the following modules:
 
 ROOT::
 Intended for the general overview of the modul from a technical point of view.
@@ -171,7 +174,7 @@ This is an arc42 template for documenting the architecture of the module.
 api::
 This is where API documentation should be placed.
 The maven `generate-sources` lifecycle phase also generates asciidoc based documentation from the OpenAPI specification.
-This module allows to combine hand-written documentation with generated documentation.
+This module allows combining handwritten documentation with generated documentation.
 
 [[conventional-commits]]
 == Conventional Commits
