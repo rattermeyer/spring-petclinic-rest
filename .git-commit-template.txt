@@ -52,25 +52,10 @@
 
 # ## Help ##
 #
-# Stick to Conventiona Commits, see: https://www.conventionalcommits.org/en/v1.0.0/#summary
-# types: as defined by https://github.com/conventional-changelog/commitlint/tree/master/@commitlint/config-conventional
-# examples
-#  feat(parser): add ability to parse arrays
-#
-# reference: https://www.conventionalcommits.org/en/v1.0.0/#summary
-#
-# For the subject line:
-#   * Use 50 characters maximum.
-#   * Do not use a sentence-ending period.
-#
-# A properly formed Git commit subject line should always be able to complete the following sentence:
-#
-# If applied, this commit will your subject line here
-# For example: If applied, this commit will refactor subsystem X for readability
-#
-# For the body text:
-#   * Use as many lines as you like.
-#   * Use 72 characters maximum per line for typical word wrap text.
-#
-#
 # For research see, e.g. What makes a good commit message, ICSE22, https://dlnext.acm.org/doi/10.1145/3510003.3510205
+#
+# Examples
+# fix(lang): fix typo index page translated into english
+# docs(about): Add git-semver cli tool
+# build(deps): bump yaml from 2.3.1 to 2.3.2
+# fix: use full commit hashes for links
